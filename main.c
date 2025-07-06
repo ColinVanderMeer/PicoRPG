@@ -289,6 +289,8 @@ void menu(hagl_backend_t *display) {
         hagl_fill_rectangle_xyxy(display, 7, 15, 10, 120, 0x0000);
         hagl_blit_xy(display, 7, 17 + selection * 10, &selector);
 
+        update_mod_player();
+
         hagl_flush(display);
 
         if (!gpio_get(5) && !butPressed) {
