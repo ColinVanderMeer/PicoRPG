@@ -5,6 +5,10 @@
 #include <hagl_hal.h>
 #include <hagl.h>
 
+#include <fps.h>
+static fps_instance_t fps;
+wchar_t fpsCounter[32];
+
 #include <font6x9.h>
 
 #include <wchar.h>
@@ -24,6 +28,7 @@
 #include "interactableMap.h"
 
 #define FLASH_TARGET_OFFSET (2044 * 1024)
+static const uint64_t US_PER_FRAME_60_FPS = 1000000 / 60;
 
 struct player {
     float x, y;
@@ -426,6 +431,7 @@ void handleInput(hagl_backend_t *display) {
 
 void gameLoop(hagl_backend_t *display) {
     while (1) {
+        uint64_t start = time_us_64();
         hagl_clear(display);
         renderMap(display);
 
@@ -502,6 +508,8 @@ void gameLoop(hagl_backend_t *display) {
             player.y = 100;
         }
 
+        swprintf(fpsCounter, sizeof(fpsCounter), L"%.*f FPS  ", 0, fps.current);
+        hagl_put_text(display, fpsCounter, 4, display->height - 14, 0x0ff0, font6x9);
 
         if (textBoxActive) {
             player.steps = 0;
@@ -514,6 +522,8 @@ void gameLoop(hagl_backend_t *display) {
         }
         update_mod_player();
         hagl_flush(display);
+        busy_wait_until(start + US_PER_FRAME_60_FPS);
+        fps_update(&fps);
     }
 }
 
@@ -541,6 +551,8 @@ int main()
     initInput();
 
     sound_i2s_init(&sound_config);
+
+    fps_init(&fps);
 
     int soundActive = titleScreen(display);
 
