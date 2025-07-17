@@ -131,26 +131,7 @@ void renderSprite(hagl_backend_t *display, int px, int py, hagl_bitmap_t *bitmap
 void renderMap(hagl_backend_t *display) {
     for (uint8_t x = 0; x < 10; x++) {
         for (uint8_t y = 0; y < 8; y++) {
-            switch (currentMap->map[y][x]) {
-                case 'W':
-                    hagl_blit(display, x*16, y*16, &wallTile);
-                    break;
-                case 'F':
-                    hagl_blit(display, x*16, y*16, &floorTile);
-                    break;
-                case 'G':
-                    hagl_blit(display, x*16, y*16, &grassTile);
-                    break;
-                case 'E':
-                    hagl_blit(display, x*16, y*16, &fenceTile);
-                    break;
-                case 'R':
-                    hagl_blit(display, x*16, y*16, &roadTile);
-                    break;
-                case 'C':
-                    hagl_blit(display, x*16, y*16, &roadCenterTile);
-                    break;
-            }
+            hagl_blit(display, x*16, y*16, currentMap->tiles[y][x]);
         }
     }
 }

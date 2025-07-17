@@ -36,14 +36,11 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-# Get all PNG files in the assets directory
-file(GLOB ASSET_FILES "${CMAKE_CURRENT_SOURCE_DIR}/assets/*.png")
 
 # Custom command to generate graphics.h from assets
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/graphics.h
     COMMAND python ${CMAKE_CURRENT_SOURCE_DIR}/convert_sprites.py ${CMAKE_CURRENT_SOURCE_DIR}/assets graphics.h
-    DEPENDS ${ASSET_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/convert_sprites.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT "Converting sprites to graphics.h"
 )

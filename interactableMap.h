@@ -7,7 +7,7 @@ struct interactableObject {
 };
 
 struct interactableObject sign1 = {
-    .x = 100,
+    .x = 110,
     .y = 16,
     .sprite = &sign,
     .numMessages = 4,
@@ -20,7 +20,7 @@ struct interactableObject sign1 = {
 };
 
 struct interactableObject sign2 = {
-    .x = 50,
+    .x = 60,
     .y = 16,
     .sprite = &sign,
     .numMessages = 2,
@@ -31,7 +31,7 @@ struct interactableObject sign2 = {
 };
 
 struct interactableObject sign3 = {
-    .x = 70,
+    .x = 50,
     .y = 16,
     .sprite = &sign,
     .numMessages = 2,
@@ -42,7 +42,7 @@ struct interactableObject sign3 = {
 };
 
 struct interactableObject morayObj = {
-    .x = 120,
+    .x = 110,
     .y = 60,
     .sprite = &moray,
     .numMessages = 7,
@@ -58,8 +58,8 @@ struct interactableObject morayObj = {
 };
 
 struct interactableObject lucasObj = {
-    .x = 12,
-    .y = 21,
+    .x = 71,
+    .y = 23,
     .sprite = &lucas,
     .numMessages = 6,
     .messages = {
@@ -93,47 +93,53 @@ struct interactableObject* roadObjects[] = {
 const int numRoadObjects = sizeof(roadObjects) / sizeof(roadObjects[0]);
 
 struct map {
-    char map[8][10];
+    hagl_bitmap_t* tiles[8][10];
     struct interactableObject** objects;
     int numObjects;
 };
 
 
 struct map houseMap = {
-    "WWWWWWWWWW",
-    "WFFFFFFFFW",
-    "WFFFFFFFFW",
-    "WFFFFFFFFF",
-    "WFFFFFFFFF",
-    "WFFFFFFFFW",
-    "WFFFFFFFFW",
-    "WWWWWWWWWW",
-    houseObjects,
-    numHouseObjects,
+    .tiles = {
+        {&water, &waterA1, &water, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT},
+        {&water, &water, &waterGrassBR, &grassWaterTL, &grass, &grass, &grass, &grass, &grass, &grass},
+        {&waterA1, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
+        {&water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
+        {&waterA2, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
+        {&water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
+        {&water, &water, &waterGrassTR, &grassWaterBL, &grass, &grass, &grass, &grass, &grass, &grass},
+        {&waterA1, &water, &water, &waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB},
+    },
+    .objects = houseObjects,
+    .numObjects = numHouseObjects,
 };
 
 struct map outsideMap = {
-    "WEEEEEEEEE",
-    "WGGGGGGGGE",
-    "WGGGGGGGGE",
-    "FGGGGGGGGE",
-    "FGGGGGGGGE",
-    "WGGGGGGGGE",
-    "WGGGGGGGGE",
-    "WEEEGGEEEE",
-    outsideObjects,
-    numOutsideObjects,
+    .tiles = {
+        {&grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &waterGrassBL, &water, &water, &water, &water, &waterA1},
+        {&grass, &grass, &grass, &grass, &grassWaterR, &water, &waterA1, &water, &water, &water},
+        {&grass, &grass, &grass, &grass, &grassWaterR, &water, &water, &water, &waterA2, &water},
+        {&grass, &grass, &grass, &grass, &grassWaterTR, &grassWaterT, &grassWaterT, &grassWaterT, &waterGrassBL, &water},
+        {&grass, &grass, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+        {&grass, &grass, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &waterA1},
+        {&grass, &grass, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+        {&grassWaterB, &grassWaterB, &grassWaterB, &grassWaterBL, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+    },
+    .objects = outsideObjects,
+    .numObjects = numOutsideObjects,
 };
 
 struct map roadMap = {
-    "EEEEGGEEEE",
-    "GGGGGGGGGG",
-    "GGGGGGGGGG",
-    "RRRRRRRRRR",
-    "CCCCCCCCCC",
-    "RRRRRRRRRR",
-    "GGGGGGGGGG",
-    "GGGGGGGGGG",
-    roadObjects,
-    numRoadObjects,
+    .tiles = {
+        {&waterA2, &water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+        {&water, &water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grassWaterR, &waterA1},
+        {&water, &waterA1, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+        {&water, &water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+        {&water, &water, &water, &waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &waterGrassTL, &water},
+        {&water, &waterA2, &water, &water, &water, &water, &waterA2, &water, &water, &waterA2},
+        {&water, &water, &water, &water, &water, &water, &water, &water, &water, &water},
+        {&water, &water, &water, &water, &waterA1, &water, &water, &water, &water, &water},
+    },
+    .objects = roadObjects,
+    .numObjects = numRoadObjects,
 };
