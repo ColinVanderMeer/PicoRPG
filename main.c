@@ -445,49 +445,49 @@ void gameLoop(hagl_backend_t *display) {
         
         if (player.direction == 0) {
             if (player.steps > 60) {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkW3);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkW3);
                 if (player.steps > 80) {
                     player.steps = 0;
                 }
             } else if (player.steps > 20 && player.steps < 40) {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkW2);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkW2);
                 if (player.steps > 40) {
                     player.steps = 0;
                 }
             } else {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkW1);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkW1);
             }
         } else if (player.direction == 1) {
             if (player.steps > 20) {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkA2);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkA2);
                 if (player.steps > 40) {
                     player.steps = 0;
                 }
             } else {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkA1);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkA1);
             }
         } else if (player.direction == 2) {
             if (player.steps > 60) {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkS3);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkS3);
                 if (player.steps > 80) {
                     player.steps = 0;
                 }
             } else if (player.steps > 20 && player.steps < 40) {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkS2);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkS2);
                 if (player.steps > 40) {
                     player.steps = 0;
                 }
             } else {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkS1);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkS1);
             }
         } else if (player.direction == 3) {
             if (player.steps > 20) {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkD2);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkD2);
                 if (player.steps > 40) {
                     player.steps = 0;
                 }
             } else {
-                renderSprite(display, (int)player.x, (int)player.y, &playerWalkD1);
+                renderSprite(display, (int)player.x, (int)player.y, &friskWalkD1);
             }
         }
 

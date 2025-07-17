@@ -36,7 +36,25 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
+# Get all PNG files in the assets directory
+file(GLOB ASSET_FILES "${CMAKE_CURRENT_SOURCE_DIR}/assets/*.png")
+
+# Custom command to generate graphics.h from assets
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/graphics.h
+    COMMAND python ${CMAKE_CURRENT_SOURCE_DIR}/convert_sprites.py ${CMAKE_CURRENT_SOURCE_DIR}/assets graphics.h
+    DEPENDS ${ASSET_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/convert_sprites.py
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Converting sprites to graphics.h"
+)
+
+# Create a custom target for the graphics generation
+add_custom_target(generate_graphics DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/graphics.h)
+
 add_executable(PicoGame main.c )
+
+# Make sure graphics.h is generated before building PicoGame
+add_dependencies(PicoGame generate_graphics)
 
 pico_set_program_name(PicoGame "PicoGame")
 pico_set_program_version(PicoGame "0.1")
