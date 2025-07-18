@@ -94,6 +94,7 @@ int main()
     hagl_backend_t *display = hagl_init();
 
     initInput();
+    initPlayer();
     initGameState();
 
     sound_i2s_init(&sound_config);

@@ -44,27 +44,30 @@ void initInput(void) {
 
 void handleInput(hagl_backend_t *display) {
     if (!isTextBoxActive()) {
+        int moving = 0;
+        
         if (!gpio_get(5)) { // W
             player.y -= 0.9;
-            player.direction = 0;
+            setPlayerDirection(0); // Up direction
+            moving = 1;
         }
         if (!gpio_get(6)) { // A
             player.x -= 0.9;
-            player.direction = 1;
+            setPlayerDirection(1); // Left direction  
+            moving = 1;
         }
         if (!gpio_get(7)) { // S
             player.y += 0.9;
-            player.direction = 2;
+            setPlayerDirection(2); // Down direction
+            moving = 1;
         }
         if (!gpio_get(8)) { // D
             player.x += 0.9;
-            player.direction = 3;
+            setPlayerDirection(3); // Right direction
+            moving = 1;
         }
-    }
-    if (gpio_get(5) && gpio_get(6) && gpio_get(7) && gpio_get(8)) {
-        player.steps = 0;
-    } else {
-        player.steps++;
+        
+        setPlayerWalking(moving);
     }
     if (!gpio_get(12)) { // I
         menu(display);

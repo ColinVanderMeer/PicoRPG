@@ -12,7 +12,6 @@ This is a WIP RPG game written in C that runs on the Hack Club Sprig, a RP2040 b
 - [hagl](https://github.com/tuupola/hagl)
 - [pico-mod-player](https://github.com/moefh/pico-mod-player)
 - Music: [hymn to aurora](https://modarchive.org/index.php?request=view_by_moduleid&query=99684)
-- Player Sprites: [Toby Fox](https://undertale.com/)
-- Pixel art tiles: [Cute Fantasy RPG](https://kenmi-art.itch.io/cute-fantasy-rpg) by [Kenmi](https://kenmi-art.itch.io/)
+- Pixel art tiles and player: [Cute Fantasy RPG](https://kenmi-art.itch.io/cute-fantasy-rpg) by [Kenmi](https://kenmi-art.itch.io/)
 
 ![Demo](static/PicoRPG.JPG)
