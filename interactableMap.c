@@ -109,14 +109,14 @@ const int numItemMap3Objects = sizeof(itemMap3Objects) / sizeof(itemMap3Objects[
 
 struct map startMap = {
     .tiles = {
-        {&water, &water, &waterA1, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT},
-        {&water, &water, &waterGrassBR, &grassWaterTL, &grassA1, &grass, &grass, &grass, &grass, &grassA2},
-        {&water, &waterA2, &grassWaterL, &grass, &grass, &grass, &grassA2, &grass, &grass, &grass},
+        {&water, &water, &waterA1, &water, &water, &water, &water, &water, &waterA1, &water},
+        {&water, &water, &water, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT},
+        {&water, &waterA2, &waterGrassBR, &grassWaterTL, &grass, &grass, &grassA2, &grass, &grass, &grass},
         {&water, &water, &grassWaterL, &grassA1, &grass, &grass, &grass, &grass, &grass, &grass},
         {&waterA1, &water, &grassWaterL, &grass, &grass, &grass, &grassA2, &grass, &grass, &grass},
-        {&water, &water, &grassWaterL, &grass, &grass, &grassA1, &grass, &grass, &grass, &grass},
-        {&water, &waterA2, &waterGrassTR, &grassWaterBL, &grass, &grass, &grass, &grass, &grass, &grassA1},
-        {&water, &water, &water, &waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB}
+        {&water, &water, &waterGrassTR, &grassWaterBL, &grass, &grassA1, &grass, &grass, &grass, &grass},
+        {&water, &waterA2, &water, &waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB},
+        {&water, &water, &water, &water, &water, &water, &waterA2, &water, &water, &water}
     },
     .objects = startObjects,
     .numObjects = numstartObjects,
