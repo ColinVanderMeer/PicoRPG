@@ -54,7 +54,8 @@ class TilemapEditor:
             "grass.png", "grassWaterB.png", "grassWaterBL.png", "grassWaterBR.png",
             "grassWaterL.png", "grassWaterR.png", "grassWaterT.png", "grassWaterTL.png",
             "grassWaterTR.png", "water.png", "waterA1.png", "waterA2.png",
-            "waterGrassBL.png", "waterGrassBR.png", "waterGrassTL.png", "waterGrassTR.png"
+            "waterGrassBL.png", "waterGrassBR.png", "waterGrassTL.png", "waterGrassTR.png",
+            "grassA1.png", "grassA2.png"
         ]
         
         for filename in tile_files:

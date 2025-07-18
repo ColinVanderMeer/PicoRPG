@@ -66,67 +66,176 @@ struct interactableObject lucasObj = {
     }
 };
 
-struct interactableObject* houseObjects[] = {
+struct interactableObject* startObjects[] = {
     &sign1,
     &sign2,
 };
 
-const int numHouseObjects = sizeof(houseObjects) / sizeof(houseObjects[0]);
+const int numstartObjects = sizeof(startObjects) / sizeof(startObjects[0]);
 
-struct interactableObject* outsideObjects[] = {
+struct interactableObject* map2Objects[] = {
     &sign3,
     &morayObj,
 };
 
-const int numOutsideObjects = sizeof(outsideObjects) / sizeof(outsideObjects[0]);
+const int nummap2Objects = sizeof(map2Objects) / sizeof(map2Objects[0]);
 
-struct interactableObject* roadObjects[] = {
+struct interactableObject* map3Objects[] = {
     &lucasObj,
 };
 
-const int numRoadObjects = sizeof(roadObjects) / sizeof(roadObjects[0]);
+const int nummap3Objects = sizeof(map3Objects) / sizeof(map3Objects[0]);
 
-struct map houseMap = {
-    .tiles = {
-        {&water, &waterA1, &water, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT},
-        {&water, &water, &waterGrassBR, &grassWaterTL, &grass, &grass, &grass, &grass, &grass, &grass},
-        {&waterA1, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
-        {&water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
-        {&waterA2, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
-        {&water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
-        {&water, &water, &waterGrassTR, &grassWaterBL, &grass, &grass, &grass, &grass, &grass, &grass},
-        {&waterA1, &water, &water, &waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB},
-    },
-    .objects = houseObjects,
-    .numObjects = numHouseObjects,
+struct interactableObject* map4Objects[] = {
 };
 
-struct map outsideMap = {
-    .tiles = {
-        {&grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &waterGrassBL, &water, &water, &water, &water, &waterA1},
-        {&grass, &grass, &grass, &grass, &grassWaterR, &water, &waterA1, &water, &water, &water},
-        {&grass, &grass, &grass, &grass, &grassWaterR, &water, &water, &water, &waterA2, &water},
-        {&grass, &grass, &grass, &grass, &grassWaterTR, &grassWaterT, &grassWaterT, &grassWaterT, &waterGrassBL, &water},
-        {&grass, &grass, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &water},
-        {&grass, &grass, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &waterA1},
-        {&grass, &grass, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &water},
-        {&grassWaterB, &grassWaterB, &grassWaterB, &grassWaterBL, &grass, &grass, &grass, &grass, &grassWaterR, &water},
-    },
-    .objects = outsideObjects,
-    .numObjects = numOutsideObjects,
+const int numMap4Objects = sizeof(map4Objects) / sizeof(map4Objects[0]);
+
+struct interactableObject* itemMap1Objects[] = {
 };
 
-struct map roadMap = {
+const int numItemMap1Objects = sizeof(itemMap1Objects) / sizeof(itemMap1Objects[0]);
+
+struct interactableObject* itemMap2Objects[] = {
+};
+
+const int numItemMap2Objects = sizeof(itemMap2Objects) / sizeof(itemMap2Objects[0]);
+
+struct interactableObject* itemMap3Objects[] = {
+};
+
+const int numItemMap3Objects = sizeof(itemMap3Objects) / sizeof(itemMap3Objects[0]);
+
+
+struct map startMap = {
     .tiles = {
-        {&waterA2, &water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grassWaterR, &water},
-        {&water, &water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grassWaterR, &waterA1},
-        {&water, &waterA1, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grassWaterR, &water},
-        {&water, &water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grassWaterR, &water},
-        {&water, &water, &water, &waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &waterGrassTL, &water},
-        {&water, &waterA2, &water, &water, &water, &water, &waterA2, &water, &water, &waterA2},
+        {&water, &water, &waterA1, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT},
+        {&water, &water, &waterGrassBR, &grassWaterTL, &grassA1, &grass, &grass, &grass, &grass, &grassA2},
+        {&water, &waterA2, &grassWaterL, &grass, &grass, &grass, &grassA2, &grass, &grass, &grass},
+        {&water, &water, &grassWaterL, &grassA1, &grass, &grass, &grass, &grass, &grass, &grass},
+        {&waterA1, &water, &grassWaterL, &grass, &grass, &grass, &grassA2, &grass, &grass, &grass},
+        {&water, &water, &grassWaterL, &grass, &grass, &grassA1, &grass, &grass, &grass, &grass},
+        {&water, &waterA2, &waterGrassTR, &grassWaterBL, &grass, &grass, &grass, &grass, &grass, &grassA1},
+        {&water, &water, &water, &waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB}
+    },
+    .objects = startObjects,
+    .numObjects = numstartObjects,
+    .leftMap = NULL,
+    .rightMap = &map2,
+    .upMap = NULL,
+    .downMap = NULL,
+};
+
+struct map map2 = {
+    .tiles = {
+        {&water, &water, &grassWaterL, &grass, &grassWaterR, &water, &water, &water, &water, &water},
+        {&grassWaterT, &grassWaterT, &grassWaterTL, &grass, &grassWaterTR, &waterGrassBL, &water, &waterA2, &water, &water},
+        {&grass, &grassA2, &grass, &grass, &grassA1, &grassWaterR, &water, &water, &water, &water},
+        {&grass, &grass, &grass, &grass, &grass, &grassWaterTR, &grassWaterT, &grassWaterT, &waterGrassBL, &waterA1},
+        {&grass, &grassA1, &grass, &grass, &grass, &grassA2, &grass, &grass, &grassWaterR, &water},
+        {&grass, &grass, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+        {&grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterBL, &grass, &grassA2, &grassWaterR, &water},
+        {&water, &waterA1, &water, &water, &water, &grassWaterL, &grass, &grass, &grassWaterR, &waterA2}
+    },
+    .objects = map2Objects,
+    .numObjects = nummap2Objects,
+    .leftMap = &startMap,
+    .rightMap = NULL,
+    .upMap = NULL,
+    .downMap = &map3,
+};
+
+struct map map3 = {
+    .tiles = {
+        {&water, &waterA1, &water, &water, &water, &grassWaterL, &grass, &grass, &grassWaterR, &water},
+        {&water, &water, &water, &waterA1, &water, &grassWaterL, &grass, &grass, &grassWaterTR, &grassWaterT},
+        {&water, &waterA2, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterTL, &grass, &grassA2, &grass, &grass},
+        {&water, &waterGrassBR, &grassWaterTL, &grass, &grass, &grassA1, &grass, &grass, &grass, &grass},
+        {&waterGrassBR, &grassWaterTL, &grassA1, &grassWaterBR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB},
+        {&grassWaterL, &grass, &grass, &grassWaterR, &water, &waterA2, &water, &water, &water, &water},
+        {&grassWaterL, &grass, &grass, &grassWaterR, &water, &water, &water, &water, &water, &water},
+        {&grassWaterL, &grassA2, &grass, &grassWaterR, &waterA1, &water, &water, &water, &waterA1, &water}
+    },
+    .objects = map3Objects,
+    .numObjects = nummap3Objects,
+    .leftMap = NULL,
+    .rightMap = &map4,
+    .upMap = &map2,
+    .downMap = &itemMap1,
+};
+
+struct map map4 = {
+    .tiles = {
+        {&water, &water, &waterA1, &water, &water, &water, &water, &water, &waterA1, &water},
+        {&grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT},
+        {&grass, &grass, &grass, &grass, &grass, &grassA1, &grass, &grass, &grass, &grass},
+        {&grass, &grassA1, &grass, &grass, &grass, &grass, &grass, &grass, &grassA2, &grass},
+        {&grassWaterBL, &grass, &grass, &grass, &grassWaterBR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB},
+        {&grassWaterL, &grass, &grass, &grass, &grassWaterR, &water, &water, &waterA2, &water, &water},
+        {&grassWaterL, &grass, &grassA2, &grass, &grassWaterR, &water, &water, &water, &water, &water},
+        {&grassWaterL, &grass, &grass, &grass, &grassWaterR, &waterA2, &water, &water, &waterA1, &water}
+    },
+    .objects = map4Objects,
+    .numObjects = numMap4Objects,
+    .leftMap = &map3,
+    .rightMap = &itemMap3,
+    .upMap = NULL,
+    .downMap = &itemMap2,
+};
+
+struct map itemMap1 = {
+    .tiles = {
+        {&grassWaterL, &grass, &grass, &grassWaterR, &water, &water, &water, &water, &water, &water},
+        {&grassWaterL, &grass, &grass, &grassWaterR, &water, &water, &waterA1, &water, &water, &water},
+        {&grassWaterL, &grassA2, &grass, &grassWaterR, &water, &water, &water, &water, &water, &waterA2},
+        {&grassWaterL, &grass, &grass, &grassWaterR, &water, &water, &waterA2, &water, &water, &water},
+        {&grassWaterL, &grass, &grass, &grassWaterR, &water, &water, &water, &water, &water, &water},
+        {&waterGrassTR, &grassWaterB, &grassWaterB, &waterGrassTL, &waterA1, &water, &water, &water, &waterA2, &water},
         {&water, &water, &water, &water, &water, &water, &water, &water, &water, &water},
-        {&water, &water, &water, &water, &waterA1, &water, &water, &water, &water, &water},
+        {&water, &waterA1, &water, &water, &water, &water, &water, &water, &waterA1, &water}
     },
-    .objects = roadObjects,
-    .numObjects = numRoadObjects,
+    .objects = itemMap1Objects,
+    .numObjects = numItemMap1Objects,
+    .leftMap = NULL,
+    .rightMap = NULL,
+    .upMap = &map3,
+    .downMap = NULL,
+};
+
+struct map itemMap2 = {
+    .tiles = {
+        {&grassWaterL, &grass, &grass, &grass, &grassWaterR, &waterA2, &water, &water, &water, &water},
+        {&grassWaterL, &grassA2, &grass, &grass, &grassWaterR, &water, &water, &waterA1, &water, &water},
+        {&grassWaterL, &grass, &grass, &grass, &grassWaterR, &water, &water, &water, &water, &water},
+        {&grassWaterL, &grass, &grass, &grassA1, &grassWaterTR, &grassWaterT, &grassWaterT, &waterGrassBL, &water, &water},
+        {&grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &water, &waterA2},
+        {&waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &waterGrassTL, &water, &water},
+        {&water, &water, &water, &water, &water, &water, &water, &water, &water, &water},
+        {&water, &water, &water, &waterA1, &water, &water, &water, &water, &water, &waterA2}
+    },
+    .objects = itemMap2Objects,
+    .numObjects = numItemMap2Objects,
+    .leftMap = NULL,
+    .rightMap = NULL,
+    .upMap = &map4,
+    .downMap = NULL,
+};
+
+struct map itemMap3 = {
+    .tiles = {
+        {&water, &waterA2, &water, &water, &water, &water, &waterA1, &water, &water, &water},
+        {&grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &waterGrassBL, &water, &water, &water, &water, &waterA2},
+        {&grass, &grassA2, &grass, &grass, &grassWaterR, &water, &water, &water, &water, &water},
+        {&grass, &grass, &grass, &grass, &grassWaterR, &water, &water, &waterA1, &water, &water},
+        {&grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &waterGrassTL, &water, &water, &water, &water, &water},
+        {&water, &water, &water, &water, &water, &waterA2, &water, &water, &water, &water},
+        {&water, &water, &water, &water, &water, &water, &water, &water, &water, &waterA1},
+        {&water, &water, &waterA1, &water, &water, &waterA2, &water, &water, &water, &water}
+    },
+    .objects = itemMap3Objects,
+    .numObjects = numItemMap3Objects,
+    .leftMap = &map4,
+    .rightMap = NULL,
+    .upMap = NULL,
+    .downMap = NULL,
 };

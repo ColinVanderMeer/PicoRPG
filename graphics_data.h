@@ -6,6 +6,8 @@
 
 // External declarations for all sprites
 extern hagl_bitmap_t grass;
+extern hagl_bitmap_t grassA1;
+extern hagl_bitmap_t grassA2;
 extern hagl_bitmap_t grassWaterB;
 extern hagl_bitmap_t grassWaterBL;
 extern hagl_bitmap_t grassWaterBR;

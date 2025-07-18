@@ -2,10 +2,10 @@
 #include "player.h"
 #include "interactableMap.h"
 
-static struct map (*currentMap) = &houseMap;
+static struct map (*currentMap) = &startMap;
 
 void initGameState(void) {
-    currentMap = &houseMap;
+    currentMap = &startMap;
 }
 
 struct map* getCurrentMap(void) {
@@ -17,20 +17,30 @@ void setCurrentMap(struct map* map) {
 }
 
 void handleMapTransitions(void) {
-    if (player.x > 150 && player.y > 35 && player.y < 60 && currentMap == &houseMap) {
-        currentMap = &outsideMap;
-        player.x = 10;
+    const int SCREEN_WIDTH = 160;
+    const int SCREEN_HEIGHT = 128;
+
+    const int PLAYER_WIDTH = 16;
+    const int PLAYER_HEIGHT = 20;
+    
+    // Check if player walks off right edge
+    if (player.x > SCREEN_WIDTH && currentMap->rightMap != NULL) {
+        currentMap = currentMap->rightMap;
+        player.x = 0;
     }
-    if (player.x < 10 && player.y > 35 && player.y < 60 && currentMap == &outsideMap) {
-        currentMap = &houseMap;
-        player.x = 140;
+    // Check if player walks off left edge
+    else if (player.x < -PLAYER_WIDTH && currentMap->leftMap != NULL) {
+        currentMap = currentMap->leftMap;
+        player.x = SCREEN_WIDTH - PLAYER_WIDTH; 
     }
-    if (player.x > 55 && player.x < 85 && player.y > 110 && currentMap == &outsideMap) {
-        currentMap = &roadMap;
-        player.y = 0;
+    // Check if player walks off bottom edge
+    else if (player.y > SCREEN_HEIGHT && currentMap->downMap != NULL) {
+        currentMap = currentMap->downMap;
+        player.y = 0; 
     }
-    if (player.x > 55 && player.x < 85 && player.y < -10 && currentMap == &roadMap) {
-        currentMap = &outsideMap;
-        player.y = 100;
+    // Check if player walks off top edge
+    else if (player.y < -PLAYER_HEIGHT && currentMap->upMap != NULL) {
+        currentMap = currentMap->upMap;
+        player.y = SCREEN_HEIGHT - PLAYER_HEIGHT; 
     }
 }

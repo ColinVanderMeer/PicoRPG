@@ -20,13 +20,24 @@ void saveGame(void) {
     };
     
     uint8_t mapSaveDataBytes;
-    if (getCurrentMap() == &houseMap) {
+    if (getCurrentMap() == &startMap) {
         mapSaveDataBytes = 0;
-    } else if (getCurrentMap() == &outsideMap) {
+    } else if (getCurrentMap() == &map2) {
         mapSaveDataBytes = 1;
-    } else if (getCurrentMap() == &roadMap) {
+    } else if (getCurrentMap() == &map3) {
         mapSaveDataBytes = 2;
+    } else if (getCurrentMap() == &map4) {
+        mapSaveDataBytes = 3;
+    } else if (getCurrentMap() == &itemMap1) {
+        mapSaveDataBytes = 4;
+    } else if (getCurrentMap() == &itemMap2) {
+        mapSaveDataBytes = 5;
+    } else if (getCurrentMap() == &itemMap3) {
+        mapSaveDataBytes = 6;
+    } else {
+        mapSaveDataBytes = 0; // Default to startMap if unknown
     }
+
     
     int totalSaveSize = sizeof(struct player_save_data) + sizeof(mapSaveDataBytes);
     uint8_t* saveDataBytes = (uint8_t*) malloc(totalSaveSize);
@@ -72,13 +83,25 @@ void loadGame(void) {
     
     switch (mapSaveDataBytes) {
         case 0:
-            setCurrentMap(&houseMap);
+            setCurrentMap(&startMap);
             break;
         case 1:
-            setCurrentMap(&outsideMap);
+            setCurrentMap(&map2);
             break;
         case 2:
-            setCurrentMap(&roadMap);
+            setCurrentMap(&map3);
+            break;
+        case 3:
+            setCurrentMap(&map4);
+            break;
+        case 4:
+            setCurrentMap(&itemMap1);
+            break;
+        case 5:
+            setCurrentMap(&itemMap2);
+            break;
+        case 6:
+            setCurrentMap(&itemMap3);
             break;
     }
     printf("Loaded\n");
