@@ -6,8 +6,6 @@ This is a WIP RPG game written in C that runs on the Hack Club Sprig, a RP2040 b
 - Hold the BOOTSEL button on the back of the sprig and plug it in
 - Drag and drop the .uf2 file onto the RPI-RP2 drive
 
-#### Claude Sonnet 3.5 was used for general ideas of how to implement game mechanics
-
 ## Third party
 - [hagl](https://github.com/tuupola/hagl)
 - [pico-mod-player](https://github.com/moefh/pico-mod-player)
