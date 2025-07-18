@@ -11,7 +11,14 @@
 
 void saveGame(void) {
     printf("Starting save\n");
-    uint8_t* playerSaveDataBytes = (uint8_t*) &player;
+    
+    // Create a minimal save data structure
+    struct player_save_data playerSave = {
+        .x = player.x,
+        .y = player.y,
+        .direction = player.direction
+    };
+    
     uint8_t mapSaveDataBytes;
     if (getCurrentMap() == &houseMap) {
         mapSaveDataBytes = 0;
@@ -20,18 +27,18 @@ void saveGame(void) {
     } else if (getCurrentMap() == &roadMap) {
         mapSaveDataBytes = 2;
     }
-    uint8_t* saveDataBytes = (uint8_t*) malloc(sizeof(player) + sizeof(mapSaveDataBytes));
+    
+    int totalSaveSize = sizeof(struct player_save_data) + sizeof(mapSaveDataBytes);
+    uint8_t* saveDataBytes = (uint8_t*) malloc(totalSaveSize);
 
-    memcpy(saveDataBytes, playerSaveDataBytes, sizeof(player));
-    memcpy(saveDataBytes + sizeof(player), &mapSaveDataBytes, sizeof(mapSaveDataBytes));
+    memcpy(saveDataBytes, &playerSave, sizeof(struct player_save_data));
+    memcpy(saveDataBytes + sizeof(struct player_save_data), &mapSaveDataBytes, sizeof(mapSaveDataBytes));
 
-    int saveDataSize = sizeof(saveDataBytes);
-    printf("Save size: %d\n", saveDataSize);
+    printf("Save size: %d\n", totalSaveSize);
 
-    int writeSize = (saveDataSize / FLASH_PAGE_SIZE) + 1;
+    int writeSize = (totalSaveSize / FLASH_PAGE_SIZE) + 1;
     int sectorCount = ((writeSize * FLASH_PAGE_SIZE) / FLASH_SECTOR_SIZE) + 1; 
     printf("Save address: %d\n", FLASH_TARGET_OFFSET);
-    printf("Save size: %d", FLASH_TARGET_OFFSET);
 
     uint32_t interrupts = save_and_disable_interrupts();
     flash_range_erase(FLASH_TARGET_OFFSET, sectorCount * FLASH_SECTOR_SIZE);
@@ -45,10 +52,23 @@ void saveGame(void) {
 
 void loadGame(void) {
     const uint8_t* flash_target_contents = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET);
-    memcpy(&player, flash_target_contents, sizeof(player));
+    
+    // Load the minimal player save data
+    struct player_save_data playerSave;
+    memcpy(&playerSave, flash_target_contents, sizeof(struct player_save_data));
+    
+    // Restore only the essential player data
+    player.x = playerSave.x;
+    player.y = playerSave.y;
+    player.direction = playerSave.direction;
+    
+    // Reset animation state (don't save/load animation state)
+    player.animation_timer = 0;
+    player.is_walking = 0;
+    player.steps = 0;
     
     uint8_t mapSaveDataBytes;
-    memcpy(&mapSaveDataBytes, flash_target_contents + sizeof(player), sizeof(mapSaveDataBytes));
+    memcpy(&mapSaveDataBytes, flash_target_contents + sizeof(struct player_save_data), sizeof(mapSaveDataBytes));
     
     switch (mapSaveDataBytes) {
         case 0:
