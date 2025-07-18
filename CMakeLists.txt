@@ -37,20 +37,33 @@ pico_sdk_init()
 # Add executable. Default name is the project name, version 0.1
 
 
-# Custom command to generate graphics.h from assets
+# Custom command to generate graphics_data.c from assets
 add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/graphics.h
-    COMMAND python ${CMAKE_CURRENT_SOURCE_DIR}/convert_sprites.py ${CMAKE_CURRENT_SOURCE_DIR}/assets graphics.h
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/graphics_data.c
+    COMMAND python ${CMAKE_CURRENT_SOURCE_DIR}/convert_sprites.py ${CMAKE_CURRENT_SOURCE_DIR}/assets graphics_data
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMENT "Converting sprites to graphics.h"
+    COMMENT "Converting sprites to graphics_data.c and graphics_data.h"
 )
 
 # Create a custom target for the graphics generation
-add_custom_target(generate_graphics DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/graphics.h)
+add_custom_target(generate_graphics DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/graphics_data.c)
 
-add_executable(PicoGame main.c )
+add_executable(PicoGame 
+    main.c 
+    player.c
+    rendering.c
+    input.c
+    textbox.c
+    menu.c
+    save_system.c
+    game_state.c
+    graphics_data.c
+    interactableMap.c
+    fonts.c
+    audio.c
+)
 
-# Make sure graphics.h is generated before building PicoGame
+# Make sure graphics_data.c is generated before building PicoGame
 add_dependencies(PicoGame generate_graphics)
 
 pico_set_program_name(PicoGame "PicoGame")
