@@ -28,8 +28,6 @@ struct map {
 extern struct interactableObject sign1;
 extern struct interactableObject sign2;
 extern struct interactableObject sign3;
-extern struct interactableObject morayObj;
-extern struct interactableObject lucasObj;
 
 extern struct interactableObject* startObjects[];
 extern struct interactableObject* map2Objects[];

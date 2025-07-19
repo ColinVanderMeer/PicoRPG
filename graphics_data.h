@@ -5,6 +5,7 @@
 #include <hagl.h>
 
 // External declarations for all sprites
+extern hagl_bitmap_t cabin;
 extern hagl_bitmap_t carrot;
 extern hagl_bitmap_t grass;
 extern hagl_bitmap_t grassA1;

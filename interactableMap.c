@@ -1,5 +1,8 @@
 #include "interactableMap.h"
 
+// Forward declaration
+extern struct map cabinMap;
+
 struct interactableObject sign1 = {
     .x = 60,
     .y = 32,
@@ -66,6 +69,16 @@ struct interactableObject wheatObj = {
     }
 };
 
+struct interactableObject cabinObj = {
+    .x = 60,
+    .y = -23,
+    .sprite = &cabin,
+    .numMessages = 1,
+    .messages = {
+        L"[3]",
+    }
+};
+
 struct interactableObject* startObjects[] = {
     &sign1,
     &sign2,
@@ -107,6 +120,11 @@ struct interactableObject* itemMap3Objects[] = {
 
 const int numItemMap3Objects = sizeof(itemMap3Objects) / sizeof(itemMap3Objects[0]);
 
+struct interactableObject* cabinMapObjects[] = {
+    &cabinObj,
+};
+
+const int numCabinMapObjects = sizeof(cabinMapObjects) / sizeof(cabinMapObjects[0]);
 
 struct map startMap = {
     .tiles = {
@@ -142,7 +160,7 @@ struct map map2 = {
     .numObjects = nummap2Objects,
     .leftMap = &startMap,
     .rightMap = NULL,
-    .upMap = NULL,
+    .upMap = &cabinMap,
     .downMap = &map3,
 };
 
@@ -239,4 +257,23 @@ struct map itemMap3 = {
     .rightMap = NULL,
     .upMap = NULL,
     .downMap = NULL,
+};
+
+struct map cabinMap = {
+    .tiles = {
+        {&waterA1, &water, &water, &water, &water, &water, &water, &water, &waterA1, &water},
+        {&water, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &waterGrassBL, &water},
+        {&water, &grassWaterL, &grassA1, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+        {&water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grassA1, &grassWaterR, &water},
+        {&waterA2, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &waterA2},
+        {&water, &grassWaterL, &grass, &grassA2, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+        {&water, &grassWaterL, &grass, &grassWaterBR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &waterGrassTL, &water},
+        {&water, &grassWaterL, &grass, &grassWaterR, &water, &water, &waterA1, &water, &water, &water}
+    },
+    .objects = cabinMapObjects,
+    .numObjects = numCabinMapObjects,
+    .leftMap = NULL,
+    .rightMap = NULL,
+    .upMap = NULL,
+    .downMap = &map2,
 };
