@@ -1,68 +1,34 @@
 #include "interactableMap.h"
 
 struct interactableObject sign1 = {
-    .x = 110,
-    .y = 16,
+    .x = 60,
+    .y = 32,
     .sprite = &sign,
-    .numMessages = 4,
+    .numMessages = 1,
     .messages = {
-        L"Hello world!",
-        L"Goodbye world!",
-        L"The world exists!",
-        L"stop talking to me",
+        L"Welcome to PicoRPG! Use L to interact with objects, K to close text boxes,   and I to open the menu.",
     }
 };
 
 struct interactableObject sign2 = {
-    .x = 60,
-    .y = 16,
+    .x = 110,
+    .y = 32,
     .sprite = &sign,
-    .numMessages = 2,
+    .numMessages = 1,
     .messages = {
-        L"I'm a evil sign... I'm going to over flow the text buffer and crash the game!",
-        L"Wait what do you mean it's been patched?",
+        L"Your goal is to find the 3 magical items to open  the cabin. Good luck!",
     }
 };
 
 struct interactableObject sign3 = {
-    .x = 50,
-    .y = 16,
+    .x = 107,
+    .y = 56,
     .sprite = &sign,
-    .numMessages = 2,
+    .numMessages = 3,
     .messages = {
-        L"I'm an outdoor sign! Those inside signs are so boring!",
-        L"(This is definitely the more boring sign)",
-    }
-};
-
-struct interactableObject morayObj = {
-    .x = 110,
-    .y = 60,
-    .sprite = &moray,
-    .numMessages = 7,
-    .messages = {
-        L"What do you MEAN I'm in the wrong game!?!?",
-        L"That's absurd!",
-        L"Absolutely ridiculous!",
-        L"Unbelievable!",
-        L"Outrageous!",
-        L"Preposterous!",
-        L"I'm only here because someone can't draw sprites                            {They're right...}",
-    }
-};
-
-struct interactableObject lucasObj = {
-    .x = 71,
-    .y = 23,
-    .sprite = &lucas,
-    .numMessages = 6,
-    .messages = {
-        L"{I still haven't played Mother 3}",
-        L"{I'll get around to it eventually okay}",
-        L"{I've just been busy implementing a save system}",
-        L"{It actually works pretty well}",
-        L"{I'm pretty proud of it}",
-        L"{It's in your menu (press I to open it)}",
+        L"Some NPC's have multiple lines of text. Press L   again to see more.",
+        L"See I have so much more  to say than the 100 characters in the text box!",
+        L"Uh... actually I've run  out of things to say now.",
     }
 };
 
@@ -75,13 +41,11 @@ const int numstartObjects = sizeof(startObjects) / sizeof(startObjects[0]);
 
 struct interactableObject* map2Objects[] = {
     &sign3,
-    &morayObj,
 };
 
 const int nummap2Objects = sizeof(map2Objects) / sizeof(map2Objects[0]);
 
 struct interactableObject* map3Objects[] = {
-    &lucasObj,
 };
 
 const int nummap3Objects = sizeof(map3Objects) / sizeof(map3Objects[0]);
