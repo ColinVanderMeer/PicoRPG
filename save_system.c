@@ -16,7 +16,11 @@ void saveGame(void) {
     struct player_save_data playerSave = {
         .x = player.x,
         .y = player.y,
-        .direction = player.direction
+        .direction = player.direction,
+        .inventory[0] = player.inventory[0],
+        .inventory[1] = player.inventory[1],
+        .inventory[2] = player.inventory[2],
+        .inventory_count = player.inventory_count
     };
     
     uint8_t mapSaveDataBytes;
@@ -72,6 +76,10 @@ void loadGame(void) {
     player.x = playerSave.x;
     player.y = playerSave.y;
     player.direction = playerSave.direction;
+    player.inventory_count = playerSave.inventory_count;
+    for (int i = 0; i < player.inventory_count; i++) {
+        wcscpy(player.inventory[i].name, playerSave.inventory[i].name);
+    }
     
     // Reset animation state (don't save/load animation state)
     player.animation_timer = 0;

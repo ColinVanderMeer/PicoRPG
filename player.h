@@ -16,6 +16,10 @@ struct animation_config {
     int frame_duration;
 };
 
+struct item {
+    wchar_t name[10];
+};
+
 struct player {
     float x, y;
     int direction;
@@ -23,6 +27,8 @@ struct player {
     int animation_timer;
     int is_walking;
     struct animation_config animations[NUM_DIRECTIONS];
+    struct item inventory[3]; // Example inventory, can be expanded
+    int inventory_count; // Number of items in inventory
 };
 
 extern struct player player;

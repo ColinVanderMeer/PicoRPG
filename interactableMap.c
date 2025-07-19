@@ -24,11 +24,45 @@ struct interactableObject sign3 = {
     .x = 107,
     .y = 56,
     .sprite = &sign,
-    .numMessages = 3,
+    .numMessages = 4,
     .messages = {
         L"Some NPC's have multiple lines of text. Press L   again to see more.",
         L"See I have so much more  to say than the 100 characters in the text box!",
         L"Uh... actually I've run  out of things to say now.",
+        L"[3]",
+    }
+};
+
+struct interactableObject carrotObj = {
+    .x = 28,
+    .y = 59,
+    .sprite = &carrot,
+    .numMessages = 2,
+    .messages = {
+        L"You found a carrot! [0]",
+        L"(Picking up two carrots would be redundant.)", 
+    }
+};
+
+struct interactableObject rockObj = {
+    .x = 91,
+    .y = 65,
+    .sprite = &rock,
+    .numMessages = 2,
+    .messages = {
+        L"You found a rock! [2]",
+        L"(Picking up two rocks would be ROCKduntant.)", 
+    }
+};
+
+struct interactableObject wheatObj = {
+    .x = 39,
+    .y = 45,
+    .sprite = &wheat,
+    .numMessages = 2,
+    .messages = {
+        L"You found some wheat! [1]",
+        L"(Picking up two wheats would crash the game.)", 
     }
 };
 
@@ -56,16 +90,19 @@ struct interactableObject* map4Objects[] = {
 const int numMap4Objects = sizeof(map4Objects) / sizeof(map4Objects[0]);
 
 struct interactableObject* itemMap1Objects[] = {
+    &carrotObj,
 };
 
 const int numItemMap1Objects = sizeof(itemMap1Objects) / sizeof(itemMap1Objects[0]);
 
 struct interactableObject* itemMap2Objects[] = {
+    &rockObj,
 };
 
 const int numItemMap2Objects = sizeof(itemMap2Objects) / sizeof(itemMap2Objects[0]);
 
 struct interactableObject* itemMap3Objects[] = {
+    &wheatObj,
 };
 
 const int numItemMap3Objects = sizeof(itemMap3Objects) / sizeof(itemMap3Objects[0]);

@@ -5,6 +5,7 @@
 #include <hagl.h>
 
 // External declarations for all sprites
+extern hagl_bitmap_t carrot;
 extern hagl_bitmap_t grass;
 extern hagl_bitmap_t grassA1;
 extern hagl_bitmap_t grassA2;
@@ -17,8 +18,6 @@ extern hagl_bitmap_t grassWaterT;
 extern hagl_bitmap_t grassWaterTL;
 extern hagl_bitmap_t grassWaterTR;
 extern hagl_bitmap_t logoText;
-extern hagl_bitmap_t lucas;
-extern hagl_bitmap_t moray;
 extern hagl_bitmap_t playerIdleA1;
 extern hagl_bitmap_t playerIdleA2;
 extern hagl_bitmap_t playerIdleA3;
@@ -55,6 +54,7 @@ extern hagl_bitmap_t playerWalkW3;
 extern hagl_bitmap_t playerWalkW4;
 extern hagl_bitmap_t playerWalkW5;
 extern hagl_bitmap_t playerWalkW6;
+extern hagl_bitmap_t rock;
 extern hagl_bitmap_t selector;
 extern hagl_bitmap_t sign;
 extern hagl_bitmap_t water;
@@ -64,5 +64,6 @@ extern hagl_bitmap_t waterGrassBL;
 extern hagl_bitmap_t waterGrassBR;
 extern hagl_bitmap_t waterGrassTL;
 extern hagl_bitmap_t waterGrassTR;
+extern hagl_bitmap_t wheat;
 
 #endif // GRAPHICS_DATA_H

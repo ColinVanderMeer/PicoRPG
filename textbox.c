@@ -18,20 +18,26 @@ static bool textBoxActive = false;
 void executeFunction(int functionCode) {
     switch (functionCode) {
         case 0:
-            // Teleport player to 0,0
-            player.x = 0;
-            player.y = 0;
+            wcscpy(player.inventory[player.inventory_count].name, L"Carrot");
+            player.inventory_count++;
             break;
         case 1:
-            // Example: Teleport to position 100,100
-            player.x = 100;
-            player.y = 100;
+            wcscpy(player.inventory[player.inventory_count].name, L"Wheat");
+            player.inventory_count++;
             break;
         case 2:
-            // Example: Give player something or trigger event
-            // Add your custom logic here
+            wcscpy(player.inventory[player.inventory_count].name, L"Rock");
+            player.inventory_count++;
             break;
-        // Add more function codes as needed
+        case 3:
+            if (player.inventory_count == 3) {
+                // Textbox says "look for the 3 magical items"
+                wcscpy(textLine1, L"The door opens...");
+            } else {
+                // Textbox says "look for the 3 magical items"
+                wcscpy(textLine1, L"Look for the 3 magical items!");
+            }
+            break;
         default:
             // Unknown function code, do nothing
             break;

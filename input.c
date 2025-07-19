@@ -76,6 +76,11 @@ void handleInput(hagl_backend_t *display) {
         printf("Player X: %f, Player Y: %f\n", player.x, player.y);
         printf("Save size: %d, %d\n", sizeof(player), sizeof(void*));
         printf("Save address: %x\n", getAddressPersistent());
+        // print player inventory
+        printf("Inventory count: %d\n", player.inventory_count);
+        for (int i = 0; i < player.inventory_count; i++) {
+            printf("Item %d: %ls\n", i, player.inventory[i].name);
+        }
     }
     if (!gpio_get(14)) { // K
         setTextBoxActive(false);
