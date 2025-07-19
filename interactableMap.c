@@ -79,6 +79,16 @@ struct interactableObject cabinObj = {
     }
 };
 
+struct interactableObject sprigObj = {
+    .x = 54,
+    .y = 19,
+    .sprite = &sprigDino,
+    .numMessages = 1,
+    .messages = {
+        L"sprig",
+    }
+};
+
 struct interactableObject* startObjects[] = {
     &sign1,
     &sign2,
@@ -125,6 +135,12 @@ struct interactableObject* cabinMapObjects[] = {
 };
 
 const int numCabinMapObjects = sizeof(cabinMapObjects) / sizeof(cabinMapObjects[0]);
+
+struct interactableObject* sprigRoomObjects[] = {
+    &sprigObj,
+};
+
+const int sprigRoomNumObjects = sizeof(sprigRoomObjects) / sizeof(sprigRoomObjects[0]);
 
 struct map startMap = {
     .tiles = {
@@ -276,4 +292,19 @@ struct map cabinMap = {
     .rightMap = NULL,
     .upMap = NULL,
     .downMap = &map2,
+};
+
+struct map sprigRoom = {
+    .tiles = {
+        {&blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile},
+        {&blackTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &blackTile},
+        {&blackTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &blackTile},
+        {&blackTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &blackTile},
+        {&blackTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &blackTile},
+        {&blackTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &greyTile, &blackTile},
+        {&blackTile, &blackTile, &blackTile, &blackTile, &greyTile, &greyTile, &blackTile, &blackTile, &blackTile, &blackTile},
+        {&blackTile, &blackTile, &blackTile, &blackTile, &greyTile, &greyTile, &blackTile, &blackTile, &blackTile, &blackTile}
+    },
+    .objects = sprigRoomObjects,
+    .numObjects = sprigRoomNumObjects,
 };

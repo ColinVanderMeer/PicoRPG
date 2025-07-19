@@ -51,8 +51,9 @@ void gameLoop(hagl_backend_t *display) {
         hagl_color_t color = 0xffff;
 
         renderInteractableObjects(display);
-
-        handleInput(display);
+        if (!doorOpeningActive) {
+            handleInput(display);
+        }
         
         renderPlayer(display);
 
@@ -65,6 +66,9 @@ void gameLoop(hagl_backend_t *display) {
             player.steps = 0;
             renderTextBox(display);
         }
+        
+        updateTextBoxTimer();
+        
         update_mod_player();
         hagl_flush(display);
         busy_wait_until(start + US_PER_FRAME_60_FPS);

@@ -6,6 +6,7 @@
 #include <wchar.h>
 #include <string.h>
 #include <stdlib.h>
+#include "pico/stdlib.h"
 
 wchar_t textLine1[26] = L"";
 wchar_t textLine2[26] = L"";
@@ -13,6 +14,9 @@ wchar_t textLine3[26] = L"";
 wchar_t textLine4[26] = L"";
 
 static bool textBoxActive = false;
+bool doorOpeningActive = false;
+static uint64_t doorOpeningStartTime = 0;
+static const uint64_t DOOR_OPENING_DURATION_US = 5000000; // 5 seconds in microseconds
 
 // Execute special functions based on number codes
 void executeFunction(int functionCode) {
@@ -31,8 +35,10 @@ void executeFunction(int functionCode) {
             break;
         case 3:
             if (player.inventory_count == 3) {
-                // Textbox says "look for the 3 magical items"
+                // Start the door opening sequence
                 wcscpy(textLine1, L"The door opens...");
+                doorOpeningActive = true;
+                doorOpeningStartTime = time_us_64();
             } else {
                 // Textbox says "look for the 3 magical items"
                 wcscpy(textLine1, L"Look for the 3 magical items!");
@@ -186,5 +192,20 @@ void renderTextBox(hagl_backend_t *display) {
         hagl_put_text(display, textLine2, 5, 95, color, font6x9);
         hagl_put_text(display, textLine3, 5, 105, color, font6x9);
         hagl_put_text(display, textLine4, 5, 115, color, font6x9);
+    }
+}
+
+void updateTextBoxTimer(void) {
+    if (doorOpeningActive) {
+        uint64_t currentTime = time_us_64();
+        if (currentTime - doorOpeningStartTime >= DOOR_OPENING_DURATION_US) {
+            // 5 seconds have passed, teleport player to sprigRoom
+            doorOpeningActive = false;
+            textBoxActive = false;
+            setCurrentMap(&sprigRoom);
+            // Set player position in the center of the new room
+            player.x = 72;  // Center of 160px wide screen
+            player.y = 104;  // Center of 128px high screen
+        }
     }
 }

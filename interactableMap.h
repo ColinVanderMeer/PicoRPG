@@ -36,6 +36,7 @@ extern struct interactableObject* map4Objects[];
 extern struct interactableObject* itemMap1Objects[];
 extern struct interactableObject* itemMap2Objects[];
 extern struct interactableObject* itemMap3Objects[];
+extern struct interactableObject* sprigRoomObjects[];
 
 extern const int numstartObjects;
 extern const int nummap2Objects;
@@ -44,6 +45,7 @@ extern const int numMap4Objects;
 extern const int numItemMap1Objects;
 extern const int numItemMap2Objects;
 extern const int numItemMap3Objects;
+extern const int sprigRoomNumObjects;
 
 extern struct map startMap;
 extern struct map map2;
@@ -52,5 +54,6 @@ extern struct map map4;
 extern struct map itemMap1;
 extern struct map itemMap2;
 extern struct map itemMap3;
+extern struct map sprigRoom;
 
 #endif // INTERACTABLE_MAP_H
