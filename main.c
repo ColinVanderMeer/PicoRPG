@@ -5,10 +5,6 @@
 #include <hagl_hal.h>
 #include <hagl.h>
 
-#include <fps.h>
-static fps_instance_t fps;
-wchar_t fpsCounter[32];
-
 #include "fonts.h"
 
 #include <wchar.h>
@@ -59,8 +55,6 @@ void gameLoop(hagl_backend_t *display) {
 
         handleMapTransitions();
 
-        swprintf(fpsCounter, sizeof(fpsCounter), L"%.*f FPS  ", 0, fps.current);
-        hagl_put_text(display, fpsCounter, 4, display->height - 14, 0x0ff0, font6x9);
 
         if (isTextBoxActive()) {
             player.steps = 0;
@@ -72,7 +66,6 @@ void gameLoop(hagl_backend_t *display) {
         update_mod_player();
         hagl_flush(display);
         busy_wait_until(start + US_PER_FRAME_60_FPS);
-        fps_update(&fps);
     }
 }
 
@@ -103,7 +96,6 @@ int main()
 
     sound_i2s_init(&sound_config);
 
-    fps_init(&fps);
 
     int soundActive = titleScreen(display);
 

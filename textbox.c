@@ -204,7 +204,7 @@ void updateTextBoxTimer(void) {
             textBoxActive = false;
             setCurrentMap(&sprigRoom);
             // Set player position in the center of the new room
-            player.x = 72;  // Center of 160px wide screen
+            player.x = 74;  // Center of 160px wide screen
             player.y = 104;  // Center of 128px high screen
         }
     }

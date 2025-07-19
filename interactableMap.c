@@ -27,12 +27,11 @@ struct interactableObject sign3 = {
     .x = 107,
     .y = 56,
     .sprite = &sign,
-    .numMessages = 4,
+    .numMessages = 3,
     .messages = {
         L"Some NPC's have multiple lines of text. Press L   again to see more.",
         L"See I have so much more  to say than the 100 characters in the text box!",
         L"Uh... actually I've run  out of things to say now.",
-        L"[3]",
     }
 };
 
