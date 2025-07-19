@@ -5,6 +5,7 @@
 #include "fonts.h"
 #include <wchar.h>
 #include <string.h>
+#include <stdlib.h>
 
 wchar_t textLine1[26] = L"";
 wchar_t textLine2[26] = L"";
@@ -12,6 +13,105 @@ wchar_t textLine3[26] = L"";
 wchar_t textLine4[26] = L"";
 
 static bool textBoxActive = false;
+
+// Execute special functions based on number codes
+void executeFunction(int functionCode) {
+    switch (functionCode) {
+        case 0:
+            // Teleport player to 0,0
+            player.x = 0;
+            player.y = 0;
+            break;
+        case 1:
+            // Example: Teleport to position 100,100
+            player.x = 100;
+            player.y = 100;
+            break;
+        case 2:
+            // Example: Give player something or trigger event
+            // Add your custom logic here
+            break;
+        // Add more function codes as needed
+        default:
+            // Unknown function code, do nothing
+            break;
+    }
+}
+
+// Parse message and handle special functions while formatting text
+void parseMessage(const wchar_t* message) {
+    // Clear all text lines
+    wcscpy(textLine1, L"");
+    wcscpy(textLine2, L"");
+    wcscpy(textLine3, L"");
+    wcscpy(textLine4, L"");
+    
+    wchar_t* lines[4] = {textLine1, textLine2, textLine3, textLine4};
+    int currentLine = 0;
+    int currentPos = 0;
+    const int maxLineLength = 25;
+    
+    for (int i = 0; message[i] != L'\0' && currentLine < 4; i++) {
+        if (message[i] == L'[') {
+            // Look for closing bracket
+            int j = i + 1;
+            while (message[j] != L'\0' && message[j] != L']') {
+                j++;
+            }
+            
+            if (message[j] == L']') {
+                // Extract the number between brackets
+                wchar_t functionCodeStr[10] = L"";
+                int codeLength = j - i - 1;
+                if (codeLength < 10) {
+                    wcsncpy(functionCodeStr, &message[i + 1], codeLength);
+                    functionCodeStr[codeLength] = L'\0';
+                    
+                    // Convert to integer and execute function
+                    int functionCode = wcstol(functionCodeStr, NULL, 10);
+                    executeFunction(functionCode);
+                }
+                
+                // Skip past the closing bracket
+                i = j;
+                continue;
+            }
+        }
+        
+        // Regular character - add to current line
+        if (currentPos < maxLineLength) {
+            // Skip leading spaces on any line
+            if (currentPos == 0 && message[i] == L' ') {
+                continue;
+            }
+            lines[currentLine][currentPos] = message[i];
+            lines[currentLine][currentPos + 1] = L'\0';
+            currentPos++;
+        } else {
+            // Move to next line
+            currentLine++;
+            if (currentLine < 4) {
+                currentPos = 0;
+                // Skip leading spaces on new line
+                if (message[i] == L' ') {
+                    continue;
+                }
+                lines[currentLine][currentPos] = message[i];
+                lines[currentLine][currentPos + 1] = L'\0';
+                currentPos++;
+            }
+        }
+    }
+    
+    // Pad remaining space in lines with spaces for consistent display
+    for (int line = 0; line < 4; line++) {
+        int len = wcslen(lines[line]);
+        for (int pos = len; pos < maxLineLength; pos++) {
+            lines[line][pos] = L' ';
+        }
+        lines[line][maxLineLength] = L'\0';
+    }
+}
 
 bool isTextBoxActive(void) {
     return textBoxActive;
@@ -59,78 +159,8 @@ void interactObject(hagl_backend_t *display) {
             playerBoxY2 > currentMap->objects[i]->y
         ) {
             textBoxActive = true;
-            // TODO: This code sucks, it is atrociously bad. If you are reading this code right now and know how to make it better, please submit a PR.
-            int messageLength = wcslen(currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber]);
-            if (messageLength < 26) {
-                wcscpy(textLine1, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber]);
-                wcscpy(textLine2, L"                         ");
-                wcscpy(textLine3, L"                         ");
-                wcscpy(textLine4, L"                         ");
-            } else if (messageLength < 52) {
-                wcscpy(textLine1, wcsncpy(textLine1, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber], 25));
-                if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][25] == ' ') {
-                    wcscpy(textLine2, wcsncpy(textLine2, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 26, 25));
-                } else {
-                    wcscpy(textLine2, wcsncpy(textLine2, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 25, 25));
-                }
-                wcscpy(textLine3, L"                         ");
-                wcscpy(textLine4, L"                         ");
-            } else if (messageLength < 78) {
-                wcscpy(textLine1, wcsncpy(textLine1, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber], 25));
-                if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][25] == ' ') {
-                    wcscpy(textLine2, wcsncpy(textLine2, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 26, 25));
-                    if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][51] == ' ') {
-                        wcscpy(textLine3, wcsncpy(textLine3, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 52, 25));
-                    } else {
-                        wcscpy(textLine3, wcsncpy(textLine3, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 51, 25));
-                    }
-                } else {
-                    wcscpy(textLine2, wcsncpy(textLine2, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 25, 25));
-                    if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][50] == ' ') {
-                        wcscpy(textLine3, wcsncpy(textLine3, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 51, 25));
-                    } else {
-                        wcscpy(textLine3, wcsncpy(textLine3, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 50, 25));
-                    }
-                }
-                wcscpy(textLine4, L"                         ");
-            } else {
-                wcscpy(textLine1, wcsncpy(textLine1, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber], 25));
-                if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][25] == ' ') {
-                    wcscpy(textLine2, wcsncpy(textLine2, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 26, 25));
-                    if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][51] == ' ') {
-                        wcscpy(textLine3, wcsncpy(textLine3, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 52, 25));
-                        if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][77] == ' ') {
-                            wcscpy(textLine4, wcsncpy(textLine4, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 78, 25));
-                        } else {
-                            wcscpy(textLine4, wcsncpy(textLine4, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 77, 25));
-                        }
-                    } else {
-                        wcscpy(textLine3, wcsncpy(textLine3, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 51, 25));
-                        if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][76] == ' ') {
-                            wcscpy(textLine4, wcsncpy(textLine4, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 77, 25));
-                        } else {
-                            wcscpy(textLine4, wcsncpy(textLine4, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 76, 25));
-                        }
-                    }
-                } else {
-                    wcscpy(textLine2, wcsncpy(textLine2, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 25, 25));
-                    if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][50] == ' ') {
-                        wcscpy(textLine3, wcsncpy(textLine3, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 51, 25));
-                        if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][76] == ' ') {
-                            wcscpy(textLine4, wcsncpy(textLine4, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 77, 25));
-                        } else {
-                            wcscpy(textLine4, wcsncpy(textLine4, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 76, 25));
-                        }
-                    } else {
-                        wcscpy(textLine3, wcsncpy(textLine3, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 50, 25));
-                        if (currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber][75] == ' ') {
-                            wcscpy(textLine4, wcsncpy(textLine4, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 76, 25));
-                        } else {
-                            wcscpy(textLine4, wcsncpy(textLine4, currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber] + 75, 25));
-                        }
-                    }
-                }
-            }
+            // Parse the message and handle any special function codes
+            parseMessage(currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber]);
 
             if (currentMap->objects[i]->messageNumber < currentMap->objects[i]->numMessages - 1) {
                 currentMap->objects[i]->messageNumber++;
