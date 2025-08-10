@@ -47,24 +47,28 @@ void handleInput(hagl_backend_t *display) {
         int moving = 0;
         
         if (!gpio_get(5)) { // W
-            player.y -= 0.9;
-            setPlayerDirection(0); // Up direction
-            moving = 1;
+            if (tryMovePlayer(0, -0.9)) {
+                setPlayerDirection(0); // Up direction
+                moving = 1;
+            }
         }
         if (!gpio_get(6)) { // A
-            player.x -= 0.9;
-            setPlayerDirection(1); // Left direction  
-            moving = 1;
+            if (tryMovePlayer(-0.9, 0)) {
+                setPlayerDirection(1); // Left direction  
+                moving = 1;
+            }
         }
         if (!gpio_get(7)) { // S
-            player.y += 0.9;
-            setPlayerDirection(2); // Down direction
-            moving = 1;
+            if (tryMovePlayer(0, 0.9)) {
+                setPlayerDirection(2); // Down direction
+                moving = 1;
+            }
         }
         if (!gpio_get(8)) { // D
-            player.x += 0.9;
-            setPlayerDirection(3); // Right direction
-            moving = 1;
+            if (tryMovePlayer(0.9, 0)) {
+                setPlayerDirection(3); // Right direction
+                moving = 1;
+            }
         }
         
         setPlayerWalking(moving);

@@ -162,8 +162,8 @@ struct map startMap = {
 
 struct map map2 = {
     .tiles = {
-        {&water, &water, &grassWaterL, &grass, &grassWaterR, &water, &water, &water, &water, &water},
-        {&grassWaterT, &grassWaterT, &grassWaterTL, &grass, &grassWaterTR, &waterGrassBL, &water, &waterA2, &water, &water},
+        {&water, &grassWaterL, &grass, &grassWaterR, &water, &water, &water, &water, &water, &water},
+        {&grassWaterT, &grassWaterTL, &grass, &grassWaterTR, &grassWaterT, &waterGrassBL, &water, &waterA2, &water, &water},
         {&grass, &grassA2, &grass, &grass, &grassA1, &grassWaterR, &water, &water, &water, &water},
         {&grass, &grass, &grass, &grass, &grass, &grassWaterTR, &grassWaterT, &grassWaterT, &waterGrassBL, &waterA1},
         {&grass, &grassA1, &grass, &grass, &grass, &grassA2, &grass, &grass, &grassWaterR, &water},
@@ -276,15 +276,15 @@ struct map itemMap3 = {
 
 struct map cabinMap = {
     .tiles = {
-        {&waterA1, &water, &water, &water, &water, &water, &water, &water, &waterA1, &water},
-        {&water, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &waterGrassBL, &water},
-        {&water, &grassWaterL, &grassA1, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &water},
-        {&water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grassA1, &grassWaterR, &water},
-        {&waterA2, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grassWaterR, &waterA2},
-        {&water, &grassWaterL, &grass, &grassA2, &grass, &grass, &grass, &grass, &grassWaterR, &water},
-        {&water, &grassWaterL, &grass, &grassWaterBR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &waterGrassTL, &water},
-        {&water, &grassWaterL, &grass, &grassWaterR, &water, &water, &waterA1, &water, &water, &water}
-    },
+    {&waterA1, &water, &water, &water, &water, &water, &water, &water, &waterA1, &water},
+    {&water, &waterGrassBR, &grassWaterT, &grassWaterT, &water, &water, &water, &water, &waterGrassBL, &water},
+    {&water, &grassWaterL, &grassA1, &grass, &water, &water, &water, &water, &grassWaterR, &water},
+    {&water, &grassWaterL, &grass, &grass, &water, &water, &water, &water, &grassWaterR, &water},
+    {&waterA2, &grassWaterL, &grass, &grass, &water, &water, &water, &water, &grassWaterR, &waterA2},
+    {&water, &grassWaterL, &grass, &grassA2, &grass, &grass, &grass, &grass, &grassWaterR, &water},
+    {&water, &grassWaterL, &grass, &grassWaterBR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &waterGrassTL, &water},
+    {&water, &grassWaterL, &grass, &grassWaterR, &water, &water, &waterA1, &water, &water, &water}
+},
     .objects = cabinMapObjects,
     .numObjects = numCabinMapObjects,
     .leftMap = NULL,

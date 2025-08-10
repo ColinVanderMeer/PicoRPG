@@ -1,12 +1,13 @@
 #include "player.h"
 #include "graphics_data.h"
 #include "rendering.h"
+#include "game_state.h"
 
 struct player player;
 
 void initPlayer() {
-    player.x = 30;
-    player.y = 30;
+    player.x = 40;
+    player.y = 40;
     player.direction = 2;
     player.steps = 0;
     player.animation_timer = 0;
@@ -108,3 +109,57 @@ void setPlayerDirection(int direction) {
         player.direction = direction;
     }
 }
+
+bool isWaterTile(hagl_bitmap_t *tile) {
+    return (tile == &water || 
+            tile == &waterA1 || 
+            tile == &waterA2);
+}
+
+bool canMoveTo(float newX, float newY) {
+    struct map *currentMap = getCurrentMap();
+    
+    const int TILE_SIZE = 16;
+    const int PLAYER_WIDTH = 16;
+    const int PLAYER_HEIGHT = 20;
+    
+    // Check the corners of the player sprite
+    int tileX1 = (int)(newX / TILE_SIZE);
+    int tileY1 = (int)(newY / TILE_SIZE);
+    int tileX2 = (int)((newX + PLAYER_WIDTH - 1) / TILE_SIZE);
+    int tileY2 = (int)((newY + PLAYER_HEIGHT - 1) / TILE_SIZE);
+    
+    // Allow 1 tile off the edge of screen for map transitions
+    if (tileX1 < -1 || tileY1 < -1 || tileX2 > 10 || tileY2 > 8) {
+        return false;
+    }
+    
+    // If player is only 1 tile off, always return true
+    if (tileX1 < 0 || tileY1 < 0 || tileX2 >= 10 || tileY2 >= 8) {
+        return true;
+    }
+    
+    for (int y = tileY1; y <= tileY2; y++) {
+        for (int x = tileX1; x <= tileX2; x++) {
+            hagl_bitmap_t *tile = currentMap->tiles[y][x];
+            if (isWaterTile(tile)) {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+bool tryMovePlayer(float deltaX, float deltaY) {
+    float newX = player.x + deltaX;
+    float newY = player.y + deltaY;
+    
+    if (canMoveTo(newX, newY)) {
+        player.x = newX;
+        player.y = newY;
+        return true;
+    }
+    return false;
+}
+

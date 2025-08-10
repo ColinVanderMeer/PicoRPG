@@ -34,7 +34,7 @@ void handleMapTransitions(void) {
         player.x = SCREEN_WIDTH - PLAYER_WIDTH; 
     }
     // Check if player walks off bottom edge
-    else if (player.y > SCREEN_HEIGHT && currentMap->downMap != NULL) {
+    else if (player.y + 5 > SCREEN_HEIGHT && currentMap->downMap != NULL) {
         currentMap = currentMap->downMap;
         player.y = 0; 
     }

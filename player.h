@@ -38,4 +38,8 @@ void renderPlayer(hagl_backend_t *display);
 void setPlayerWalking(int walking);
 void setPlayerDirection(int direction);
 
+bool isWaterTile(hagl_bitmap_t *tile);
+bool canMoveTo(float newX, float newY);
+bool tryMovePlayer(float deltaX, float deltaY);
+
 #endif // PLAYER_H
