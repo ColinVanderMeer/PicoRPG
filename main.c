@@ -25,8 +25,6 @@
 
 static const uint64_t US_PER_FRAME_60_FPS = 1000000 / 60;
 
-bool gp15justPressed = false;
-
 static const struct sound_i2s_config sound_config = {
   .pin_scl         = 10,
   .pin_sda         = 9,
@@ -35,39 +33,6 @@ static const struct sound_i2s_config sound_config = {
   .bits_per_sample = 16,
   .pio_num         = 0,
 };
-
-void gameLoop(hagl_backend_t *display) {
-    while (1) {
-        uint64_t start = time_us_64();
-        hagl_clear(display);
-        renderMap(display);
-
-        uint16_t w = 20;
-        uint16_t h = 30;
-        hagl_color_t color = 0xffff;
-
-        renderInteractableObjects(display);
-        if (!doorOpeningActive) {
-            handleInput(display);
-        }
-        
-        renderPlayer(display);
-
-        handleMapTransitions();
-
-
-        if (isTextBoxActive()) {
-            player.steps = 0;
-            renderTextBox(display);
-        }
-        
-        updateTextBoxTimer();
-        
-        update_mod_player();
-        hagl_flush(display);
-        busy_wait_until(start + US_PER_FRAME_60_FPS);
-    }
-}
 
 int titleScreen(hagl_backend_t *display) {
     hagl_clear(display);
@@ -81,7 +46,56 @@ int titleScreen(hagl_backend_t *display) {
 
 }
 
-int main()
+uint8_t joypad(void) {
+    uint8_t state = 0;
+    
+    // Read GPIO pins for joypad state (switch style / japanese style)
+    if (!gpio_get(5)) state |= JOYPAD_UP;      // W
+    if (!gpio_get(6)) state |= JOYPAD_LEFT;    // A  
+    if (!gpio_get(7)) state |= JOYPAD_DOWN;    // S
+    if (!gpio_get(8)) state |= JOYPAD_RIGHT;   // D
+    if (!gpio_get(12)) state |= JOYPAD_X;      // I
+    if (!gpio_get(13)) state |= JOYPAD_Y;      // J
+    if (!gpio_get(14)) state |= JOYPAD_B;      // K
+    if (!gpio_get(15)) state |= JOYPAD_A;      // L
+    
+    return state;
+}
+
+void updateJoypad(void) {
+    uint8_t last = joypad_state.down;
+    joypad_state.down = joypad();
+    joypad_state.pressed = ~last & joypad_state.down;
+    joypad_state.released = last & ~joypad_state.down;
+}
+
+void gameLoop(hagl_backend_t *display) {
+
+    if (!doorOpeningActive) {
+        handleInput(display);
+    }
+
+    handleMapTransitions();
+
+    updateTextBoxTimer();
+}
+
+void render(hagl_backend_t *display) {
+    renderMap(display);
+    
+    renderInteractableObjects(display);
+
+    renderPlayer(display);
+
+    if (isTextBoxActive()) {
+        player.steps = 0;
+        renderTextBox(display);
+    }
+    
+    hagl_flush(display);
+}
+
+void main()
 {
     stdio_init_all();
 
@@ -101,8 +115,17 @@ int main()
         sound_i2s_playback_start();
     }
 
-    gameLoop(display);
+    while (1) {
+        uint64_t start = time_us_64();
+        updateJoypad();
+
+        gameLoop(display);
+        render(display);
+        update_mod_player();
+
+        busy_wait_until(start + US_PER_FRAME_60_FPS);
+    }
+
 
     hagl_close(display);
-
 }

@@ -6,7 +6,7 @@
 #include "pico/stdlib.h"
 #include <stdio.h>
 
-extern bool gp15justPressed;
+joypad_state_t joypad_state;
 
 void initInput(void) {
     gpio_init(5);
@@ -45,26 +45,26 @@ void initInput(void) {
 void handleInput(hagl_backend_t *display) {
     if (!isTextBoxActive()) {
         int moving = 0;
-        
-        if (!gpio_get(5)) { // W
+
+        if (joypad_state.down & JOYPAD_UP) { // W
             if (tryMovePlayer(0, -0.9)) {
                 setPlayerDirection(0); // Up direction
                 moving = 1;
             }
         }
-        if (!gpio_get(6)) { // A
+        if (joypad_state.down & JOYPAD_LEFT) { // A
             if (tryMovePlayer(-0.9, 0)) {
                 setPlayerDirection(1); // Left direction  
                 moving = 1;
             }
         }
-        if (!gpio_get(7)) { // S
+        if (joypad_state.down & JOYPAD_DOWN) { // S
             if (tryMovePlayer(0, 0.9)) {
                 setPlayerDirection(2); // Down direction
                 moving = 1;
             }
         }
-        if (!gpio_get(8)) { // D
+        if (joypad_state.down & JOYPAD_RIGHT) { // D
             if (tryMovePlayer(0.9, 0)) {
                 setPlayerDirection(3); // Right direction
                 moving = 1;
@@ -73,20 +73,16 @@ void handleInput(hagl_backend_t *display) {
         
         setPlayerWalking(moving);
     }
-    if (!gpio_get(12)) { // I
+    if (joypad_state.pressed & JOYPAD_X) { // I
         menu(display);
     }
-    if (!gpio_get(13)) { // J
-        
+    if (joypad_state.pressed & JOYPAD_Y) { // J
+
     }
-    if (!gpio_get(14)) { // K
+    if (joypad_state.pressed & JOYPAD_B) { // K
         setTextBoxActive(false);
     }
-    if (!gpio_get(15) && gp15justPressed) { // L
+    if (joypad_state.pressed & JOYPAD_A) { // L
         interactObject(display);
-        gp15justPressed = false;
-    }
-    if (gpio_get(15)) {
-        gp15justPressed = true;
     }
 }
