@@ -106,6 +106,7 @@ void render(hagl_backend_t *display) {
     switch (game_state) {
         case GAME_STATE_TEXTBOX:
             renderTextBox(display);
+            renderScaledSprite(display, 62, 27, &shark, 5);
             player.steps = 0;
             break;
     }
