@@ -13,9 +13,7 @@ extern wchar_t textLine4[26];
 
 extern bool doorOpeningActive;
 
-bool isTextBoxActive(void);
-void setTextBoxActive(bool active);
-void interactObject(hagl_backend_t *display);
+void interactObject(void);
 void renderTextBox(hagl_backend_t *display);
 void executeFunction(int functionCode);
 void parseMessage(const wchar_t* message);

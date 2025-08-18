@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "flash_utils.h"
 #include "pico/stdlib.h"
+#include "global.h"
 #include <stdio.h>
 
 joypad_state_t joypad_state;
@@ -43,7 +44,7 @@ void initInput(void) {
 }
 
 void handleInput(hagl_backend_t *display) {
-    if (!isTextBoxActive()) {
+    if (game_state == GAME_STATE_NORMAL) {
         int moving = 0;
 
         if (joypad_state.down & JOYPAD_UP) { // W
@@ -73,16 +74,17 @@ void handleInput(hagl_backend_t *display) {
         
         setPlayerWalking(moving);
     }
+
     if (joypad_state.pressed & JOYPAD_X) { // I
-        menu(display);
+        game_state = GAME_STATE_MENU;
     }
     if (joypad_state.pressed & JOYPAD_Y) { // J
 
     }
     if (joypad_state.pressed & JOYPAD_B) { // K
-        setTextBoxActive(false);
+        game_state = GAME_STATE_NORMAL;
     }
     if (joypad_state.pressed & JOYPAD_A) { // L
-        interactObject(display);
+        interactObject();
     }
 }

@@ -7,13 +7,13 @@
 #include <string.h>
 #include <stdlib.h>
 #include "pico/stdlib.h"
+#include "global.h"
 
 wchar_t textLine1[26] = L"";
 wchar_t textLine2[26] = L"";
 wchar_t textLine3[26] = L"";
 wchar_t textLine4[26] = L"";
 
-static bool textBoxActive = false;
 bool doorOpeningActive = false;
 static uint64_t doorOpeningStartTime = 0;
 static const uint64_t DOOR_OPENING_DURATION_US = 5000000; // 5 seconds in microseconds
@@ -125,15 +125,7 @@ void parseMessage(const wchar_t* message) {
     }
 }
 
-bool isTextBoxActive(void) {
-    return textBoxActive;
-}
-
-void setTextBoxActive(bool active) {
-    textBoxActive = active;
-}
-
-void interactObject(hagl_backend_t *display) {
+void interactObject(void) {
     struct map* currentMap = getCurrentMap();
     int playerBoxX1 = player.x;
     int playerBoxX2 = player.x;
@@ -170,7 +162,7 @@ void interactObject(hagl_backend_t *display) {
             playerBoxY1 < currentMap->objects[i]->y + currentMap->objects[i]->sprite->height &&
             playerBoxY2 > currentMap->objects[i]->y
         ) {
-            textBoxActive = true;
+            game_state = GAME_STATE_TEXTBOX;
             // Parse the message and handle any special function codes
             parseMessage(currentMap->objects[i]->messages[currentMap->objects[i]->messageNumber]);
 
@@ -184,15 +176,13 @@ void interactObject(hagl_backend_t *display) {
 }
 
 void renderTextBox(hagl_backend_t *display) {
-    if (textBoxActive) {
-        hagl_color_t color = 0xffff;
-        hagl_fill_rounded_rectangle_xyxy(display, 2, 82, 157, 125, 5, 0x0000);
-        hagl_draw_rounded_rectangle_xyxy(display, 2, 82, 157, 125, 5, color);
-        hagl_put_text(display, textLine1, 5, 85, color, font6x9);
-        hagl_put_text(display, textLine2, 5, 95, color, font6x9);
-        hagl_put_text(display, textLine3, 5, 105, color, font6x9);
-        hagl_put_text(display, textLine4, 5, 115, color, font6x9);
-    }
+    hagl_color_t color = 0xffff;
+    hagl_fill_rounded_rectangle_xyxy(display, 2, 82, 157, 125, 5, 0x0000);
+    hagl_draw_rounded_rectangle_xyxy(display, 2, 82, 157, 125, 5, color);
+    hagl_put_text(display, textLine1, 5, 85, color, font6x9);
+    hagl_put_text(display, textLine2, 5, 95, color, font6x9);
+    hagl_put_text(display, textLine3, 5, 105, color, font6x9);
+    hagl_put_text(display, textLine4, 5, 115, color, font6x9);
 }
 
 void updateTextBoxTimer(void) {
@@ -201,7 +191,7 @@ void updateTextBoxTimer(void) {
         if (currentTime - doorOpeningStartTime >= DOOR_OPENING_DURATION_US) {
             // 5 seconds have passed, teleport player to sprigRoom
             doorOpeningActive = false;
-            textBoxActive = false;
+            game_state = GAME_STATE_NORMAL;
             setCurrentMap(&sprigRoom);
             // Set player position in the center of the new room
             player.x = 74;  // Center of 160px wide screen

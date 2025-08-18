@@ -4,6 +4,7 @@
 #include "audio.h"
 #include "pico/stdlib.h"
 #include "fonts.h"
+#include "global.h"
 
 void menu(hagl_backend_t *display) {
     int selection = 0;
@@ -15,7 +16,7 @@ void menu(hagl_backend_t *display) {
     hagl_put_text(display, L"Load", 15, 25, 0xffff, font6x9);
     hagl_put_text(display, L"Exit", 15, 35, 0xffff, font6x9);
 
-    while (1) {
+    while (1) { // This is a weird backwards way to handle this, but I think it actually works well? So it'll stay until it causes a catastrophic failure.
         hagl_fill_rectangle_xyxy(display, 7, 15, 10, 120, 0x0000);
         hagl_blit_xy(display, 7, 17 + selection * 10, &selector);
 
@@ -54,6 +55,7 @@ void menu(hagl_backend_t *display) {
                     return;
                 case 2:
                     while (!gpio_get(15)) {}
+                    game_state = GAME_STATE_NORMAL;
                     return;
             }
         }

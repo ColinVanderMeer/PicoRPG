@@ -22,8 +22,10 @@
 #include "save_system.h"
 #include "game_state.h"
 #include "audio.h"
+#include "global.h"
 
 static const uint64_t US_PER_FRAME_60_FPS = 1000000 / 60;
+GameState game_state = GAME_STATE_TITLE;
 
 static const struct sound_i2s_config sound_config = {
   .pin_scl         = 10,
@@ -70,26 +72,42 @@ void updateJoypad(void) {
 }
 
 void gameLoop(hagl_backend_t *display) {
-
-    if (!doorOpeningActive) {
-        handleInput(display);
+    switch (game_state) {
+        case GAME_STATE_TITLE:
+            game_state = GAME_STATE_MENU;
+            break;
+        case GAME_STATE_NORMAL:
+            handleInput(display);
+            handleMapTransitions();
+            break;
+        case GAME_STATE_MENU:
+            menu(display);
+            break;
+        case GAME_STATE_TEXTBOX:
+            handleInput(display);
+            updateTextBoxTimer();
+            break;
+        case GAME_STATE_FISHING:
+            // Unimplemented
+            break;
+        case GAME_STATE_PC:
+            // Unimplemented
+            break;
+        default:
+            break;
     }
-
-    handleMapTransitions();
-
-    updateTextBoxTimer();
 }
 
 void render(hagl_backend_t *display) {
     renderMap(display);
-    
     renderInteractableObjects(display);
-
     renderPlayer(display);
 
-    if (isTextBoxActive()) {
-        player.steps = 0;
-        renderTextBox(display);
+    switch (game_state) {
+        case GAME_STATE_TEXTBOX:
+            renderTextBox(display);
+            player.steps = 0;
+            break;
     }
     
     hagl_flush(display);
@@ -114,6 +132,8 @@ void main()
         mod_play_start(&mod_hymn_to_aurora, 22050, 1);
         sound_i2s_playback_start();
     }
+
+    game_state = GAME_STATE_NORMAL;
 
     while (1) {
         uint64_t start = time_us_64();
