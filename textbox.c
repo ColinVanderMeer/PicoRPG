@@ -168,8 +168,44 @@ void interactObject(void) {
 
             if (currentMap->objects[i]->messageNumber < currentMap->objects[i]->numMessages - 1) {
                 currentMap->objects[i]->messageNumber++;
-            } else {
-                continue;
+            }
+            // If interacted with an object, stop here
+            return;
+        }
+    }
+
+    // If no object was interacted with, check the tile immediately in front for water
+    {
+        const int TILE_SIZE = 16;
+        int checkX = (int)player.x;
+        int checkY = (int)player.y;
+
+        switch (player.direction) {
+            case 0: // Up
+                checkX += 8;
+                checkY -= 1;
+                break;
+            case 1: // Left
+                checkX -= 1;
+                checkY += 10;
+                break;
+            case 2: // Down
+                checkX += 8;
+                checkY += 20;
+                break;
+            case 3: // Right
+                checkX += 16;
+                checkY += 10;
+                break;
+        }
+
+        int tileX = checkX / TILE_SIZE;
+        int tileY = checkY / TILE_SIZE;
+
+        if (tileX >= 0 && tileX < 10 && tileY >= 0 && tileY < 8) {
+            hagl_bitmap_t *tile = currentMap->tiles[tileY][tileX];
+            if (isWaterTile(tile)) {
+                game_state = GAME_STATE_FISHING;
             }
         }
     }
