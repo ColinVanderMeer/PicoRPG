@@ -26,6 +26,7 @@
 
 static const uint64_t US_PER_FRAME_60_FPS = 1000000 / 60;
 GameState game_state = GAME_STATE_TITLE;
+bool fish_hooked = false;
 
 static const struct sound_i2s_config sound_config = {
   .pin_scl         = 10,
@@ -106,7 +107,7 @@ void render(hagl_backend_t *display) {
     switch (game_state) {
         case GAME_STATE_TEXTBOX:
             renderTextBox(display);
-            renderScaledSprite(display, 62, 27, &shark, 5);
+            renderScaledSprite(display, 62, 27, fish_data[FISH_SHARK].texture, 5);
             player.steps = 0;
             break;
     }

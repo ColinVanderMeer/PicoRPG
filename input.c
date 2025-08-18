@@ -5,6 +5,7 @@
 #include "flash_utils.h"
 #include "pico/stdlib.h"
 #include "global.h"
+#include "fishing.h"
 #include <stdio.h>
 
 joypad_state_t joypad_state;
@@ -85,6 +86,20 @@ void handleInput(hagl_backend_t *display) {
         game_state = GAME_STATE_NORMAL;
     }
     if (joypad_state.pressed & JOYPAD_A) { // L
-        interactObject();
+        
+        switch (game_state) {
+            case GAME_STATE_NORMAL:
+                interactObject();
+                break;
+            case GAME_STATE_FISHING:
+                if (fish_hooked) {
+                    catchFish();
+                } else {
+                    game_state = GAME_STATE_NORMAL;
+                }
+                break;
+            default:
+                break;
+        }
     }
 }
