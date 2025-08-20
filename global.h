@@ -39,4 +39,6 @@ typedef struct {
 
 extern const fish_data_t fish_data[FISH_COUNT];
 
+extern fish_list globalCaughtFish;
+
 #endif // _CORE_H

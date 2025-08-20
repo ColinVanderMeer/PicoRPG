@@ -23,10 +23,12 @@
 #include "game_state.h"
 #include "audio.h"
 #include "global.h"
+#include "fishing.h"
 
 static const uint64_t US_PER_FRAME_60_FPS = 1000000 / 60;
 GameState game_state = GAME_STATE_TITLE;
 bool fish_hooked = false;
+fish_list globalCaughtFish = FISH_COUNT;
 
 static const struct sound_i2s_config sound_config = {
   .pin_scl         = 10,
@@ -89,6 +91,8 @@ void gameLoop(hagl_backend_t *display) {
             updateTextBoxTimer();
             break;
         case GAME_STATE_FISHING:
+            handleInput(display);
+            fishingProcess();
             // Unimplemented
             break;
         case GAME_STATE_PC:
@@ -107,7 +111,9 @@ void render(hagl_backend_t *display) {
     switch (game_state) {
         case GAME_STATE_TEXTBOX:
             renderTextBox(display);
-            renderScaledSprite(display, 62, 27, fish_data[FISH_SHARK].texture, 5);
+            if (globalCaughtFish != FISH_COUNT) {
+                renderScaledSprite(display, 60, 26, fish_data[globalCaughtFish].texture, 5);
+            }
             player.steps = 0;
             break;
     }
