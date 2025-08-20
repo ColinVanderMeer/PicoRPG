@@ -24,36 +24,22 @@ struct map {
     struct map* downMap;
 };
 
-// External declarations
-extern struct interactableObject sign1;
-extern struct interactableObject sign2;
-extern struct interactableObject sign3;
-
 extern struct interactableObject* startObjects[];
-extern struct interactableObject* map2Objects[];
-extern struct interactableObject* map3Objects[];
-extern struct interactableObject* map4Objects[];
-extern struct interactableObject* itemMap1Objects[];
-extern struct interactableObject* itemMap2Objects[];
-extern struct interactableObject* itemMap3Objects[];
+extern struct interactableObject* centralMapObjects[];
+extern struct interactableObject* dockMapObjects[];
+extern struct interactableObject* shopIslandMapObjects[];
 extern struct interactableObject* sprigRoomObjects[];
 
 extern const int numstartObjects;
-extern const int nummap2Objects;
-extern const int nummap3Objects;
-extern const int numMap4Objects;
-extern const int numItemMap1Objects;
-extern const int numItemMap2Objects;
-extern const int numItemMap3Objects;
+extern const int numCentralMapObjects;
+extern const int numDockMapObjects;
+extern const int numShopIslandMapObjects;
 extern const int sprigRoomNumObjects;
 
 extern struct map startMap;
-extern struct map map2;
-extern struct map map3;
-extern struct map map4;
-extern struct map itemMap1;
-extern struct map itemMap2;
-extern struct map itemMap3;
+extern struct map centralMap;
+extern struct map dockMap;
+extern struct map shopIslandMap;
 extern struct map sprigRoom;
 
 #endif // INTERACTABLE_MAP_H

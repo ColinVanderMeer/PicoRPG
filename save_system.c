@@ -26,18 +26,12 @@ void saveGame(void) {
     uint8_t mapSaveDataBytes;
     if (getCurrentMap() == &startMap) {
         mapSaveDataBytes = 0;
-    } else if (getCurrentMap() == &map2) {
+    } else if (getCurrentMap() == &centralMap) {
         mapSaveDataBytes = 1;
-    } else if (getCurrentMap() == &map3) {
+    } else if (getCurrentMap() == &dockMap) {
         mapSaveDataBytes = 2;
-    } else if (getCurrentMap() == &map4) {
+    } else if (getCurrentMap() == &shopIslandMap) {
         mapSaveDataBytes = 3;
-    } else if (getCurrentMap() == &itemMap1) {
-        mapSaveDataBytes = 4;
-    } else if (getCurrentMap() == &itemMap2) {
-        mapSaveDataBytes = 5;
-    } else if (getCurrentMap() == &itemMap3) {
-        mapSaveDataBytes = 6;
     } else {
         mapSaveDataBytes = 0; // Default to startMap if unknown
     }
@@ -94,22 +88,13 @@ void loadGame(void) {
             setCurrentMap(&startMap);
             break;
         case 1:
-            setCurrentMap(&map2);
+            setCurrentMap(&centralMap);
             break;
         case 2:
-            setCurrentMap(&map3);
+            setCurrentMap(&dockMap);
             break;
         case 3:
-            setCurrentMap(&map4);
-            break;
-        case 4:
-            setCurrentMap(&itemMap1);
-            break;
-        case 5:
-            setCurrentMap(&itemMap2);
-            break;
-        case 6:
-            setCurrentMap(&itemMap3);
+            setCurrentMap(&shopIslandMap);
             break;
     }
     printf("Loaded\n");
