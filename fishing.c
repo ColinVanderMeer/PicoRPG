@@ -3,6 +3,8 @@
 #include "textbox.h"
 #include <stdbool.h>
 #include <math.h>
+#include <wchar.h>
+#include <stdio.h>
 
 
 fish_list selectFish(void) {

@@ -5,6 +5,7 @@
 #include "pico/stdlib.h"
 #include "fonts.h"
 #include "global.h"
+#include <wchar.h>
 
 void menu(hagl_backend_t *display) {
     wchar_t moneyText[4];
