@@ -6,7 +6,7 @@
 
 int money;
 
-int fishMaxWeight[FISH_COUNT];
+float fishMaxWeight[FISH_COUNT];
 int fishTimesCaught[FISH_COUNT];
 int allFishTimesCaught;
 

@@ -43,7 +43,7 @@ extern fish_list globalCaughtFish;
 
 extern int money;
 
-extern int fishMaxWeight[FISH_COUNT];
+extern float fishMaxWeight[FISH_COUNT];
 extern int fishTimesCaught[FISH_COUNT];
 extern int allFishTimesCaught;
 

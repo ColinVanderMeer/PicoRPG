@@ -33,8 +33,8 @@ struct interactableObject sign3 = {
 };
 
 struct interactableObject sign4 = {
-    .x = 120,
-    .y = 60,
+    .x = 65,
+    .y = 100,
     .sprite = &sign,
     .numMessages = 1,
     .messages = {

@@ -18,5 +18,6 @@ void renderTextBox(hagl_backend_t *display);
 void executeFunction(int functionCode);
 void parseMessage(const wchar_t* message);
 void updateTextBoxTimer(void);
+void fishDisplay(int frameNum);
 
 #endif // TEXTBOX_H

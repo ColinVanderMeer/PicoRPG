@@ -10,7 +10,7 @@
 struct player_save_data {
     float x, y;
     int direction;
-    int fishMaxWeight[FISH_COUNT];
+    float fishMaxWeight[FISH_COUNT];
     int money;
     int fishTimesCaught[FISH_COUNT];
     int allFishTimesCaught;

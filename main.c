@@ -107,6 +107,12 @@ void render(hagl_backend_t *display) {
     renderMap(display);
     renderInteractableObjects(display);
     renderPlayer(display);
+    
+    if (currentMap == &shopMap) {
+        renderSprite(display, 46, 4, fish_data[fishDisplayFish[0]].texture);
+        renderSprite(display, 78, 4, fish_data[fishDisplayFish[0]].texture);
+        renderSprite(display, 110, 4, fish_data[fishDisplayFish[0]].texture);
+    }
 
     switch (game_state) {
         case GAME_STATE_TEXTBOX:
