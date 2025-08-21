@@ -7,6 +7,9 @@
 #include "global.h"
 
 void menu(hagl_backend_t *display) {
+    wchar_t moneyText[4];
+    swprintf(moneyText, sizeof(moneyText), L"%d", money);
+
     int selection = 0;
     int butPressed = 0;
     hagl_fill_rounded_rectangle_xyxy(display, 2, 2, 80, 125, 5, 0x0000);
@@ -15,9 +18,12 @@ void menu(hagl_backend_t *display) {
     hagl_put_text(display, L"Save", 15, 15, 0xffff, font6x9);
     hagl_put_text(display, L"Load", 15, 25, 0xffff, font6x9);
     hagl_put_text(display, L"Exit", 15, 35, 0xffff, font6x9);
+    hagl_put_text(display, L"Money: $", 5, 110, 0xffff, font6x9);
+    hagl_put_text(display, moneyText, 53, 110, 0xffff, font6x9);
+
 
     while (1) { // This is a weird backwards way to handle this, but I think it actually works well? So it'll stay until it causes a catastrophic failure.
-        hagl_fill_rectangle_xyxy(display, 7, 15, 10, 120, 0x0000);
+        hagl_fill_rectangle_xyxy(display, 7, 15, 10, 50, 0x0000);
         hagl_blit_xy(display, 7, 17 + selection * 10, &selector);
 
         update_mod_player();
