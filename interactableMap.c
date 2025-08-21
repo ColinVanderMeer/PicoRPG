@@ -73,14 +73,14 @@ const int sprigRoomNumObjects = sizeof(sprigRoomObjects) / sizeof(sprigRoomObjec
 
 struct map startMap = {
     .tiles = {
-        {&water, &water, &waterA1, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT},
-        {&water, &water, &waterGrassBR, &grassWaterTL, &grass, &grass, &grass, &grass, &grass, &grassA2},
-        {&waterA2, &water, &grassWaterL, &grass, &grass, &grassA2, &grass, &grass, &grass, &grass},
-        {&water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
-        {&water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grass, &grass},
-        {&water, &water, &grassWaterL, &grass, &grass, &grass, &grass, &grass, &grassA1, &grass},
-        {&water, &waterA1, &waterGrassTR, &grassWaterBL, &grass, &grassA2, &grass, &grass, &grass, &grass},
-        {&water, &water, &water, &waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB}
+        {&water, &water, &waterA1, &water, &water, &water, &water, &water, &water, &water},
+        {&water, &water, &water, &waterGrassBR, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT, &grassWaterT},
+        {&waterA2, &water, &waterGrassBR, &grassWaterTL, &grass, &grass, &grass, &grass, &grass, &grass},
+        {&water, &water, &grassWaterL, &grass, &grass, &grass, &grassA2, &grass, &grass, &grass},
+        {&water, &water, &grassWaterL, &grassA1, &grass, &grass, &grass, &grass, &grass, &grass},
+        {&water, &water, &waterGrassTR, &grassWaterBL, &grass, &grass, &grass, &grass, &grassA1, &grass},
+        {&water, &waterA1, &water, &waterGrassTR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB},
+        {&water, &water, &water, &water, &water, &water, &water, &waterA2, &water, &water}
     },
     .objects = startObjects,
     .numObjects = numstartObjects,
@@ -92,14 +92,14 @@ struct map startMap = {
 
 struct map centralMap = {
     .tiles = {
-        {&grassWaterT, &grassWaterT, &waterGrassBL, &waterA1, &water, &dockL, &dockR, &water, &water, &water},
-        {&grassA2, &grass, &grassWaterR, &water, &water, &dockL, &dockR, &water, &waterA2, &water},
-        {&grass, &grass, &grassWaterTR, &grassWaterT, &grassWaterT, &grassDockL, &grassDockR, &grassWaterT, &grassWaterT, &grassWaterT},
-        {&grass, &grass, &grass, &grass, &grass, &grass, &grassA2, &grass, &grass, &grassA2},
+        {&water, &water, &water, &water, &water, &dockL, &dockR, &water, &water, &water},
+        {&grassWaterT, &grassWaterT, &waterGrassBL, &water, &water, &dockL, &dockR, &water, &water, &water},
+        {&grassA1, &grass, &grassWaterTR, &grassWaterT, &grassWaterT, &grassDockL, &grassDockR, &grassWaterT, &grassWaterT, &grassWaterT},
+        {&grass, &grass, &grass, &grass, &grass, &grass, &grassA2, &grass, &grass, &grassA1},
         {&grass, &grass, &grassA1, &grass, &grassWaterBR, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB, &grassWaterB},
-        {&grassA1, &grass, &grass, &grassWaterBR, &waterGrassTL, &water, &waterA2, &water, &water, &water},
-        {&grass, &grass, &grassWaterBR, &waterGrassTL, &water, &water, &water, &water, &waterA2, &water},
-        {&grassWaterB, &grassWaterB, &waterGrassTL, &water, &water, &waterA1, &water, &water, &water, &water}
+        {&grassA2, &grass, &grass, &grassWaterBR, &waterGrassTL, &water, &water, &water, &water, &water},
+        {&grassWaterB, &grassWaterB, &grassWaterB, &waterGrassTL, &water, &water, &water, &water, &water, &water},
+        {&water, &water, &water, &water, &water, &water, &water, &water, &water, &water}
     },
     .objects = centralMapObjects,
     .numObjects = numCentralMapObjects,
