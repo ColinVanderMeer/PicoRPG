@@ -49,6 +49,14 @@ void executeFunction(int functionCode) {
         case 14:
             game_state = GAME_STATE_PC;
             break;
+
+        case 15:
+            break;
+        case 16:
+            wcscpy(textLine1, L"Look at all those fishies");
+            swprintf(textLine2, 26, L"You've caught %d", allFishTimesCaught);
+            wcscpy(textLine3, L"so far");
+            break;
         default:
             // Unknown function code, do nothing
             break;
