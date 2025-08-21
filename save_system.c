@@ -39,6 +39,10 @@ void saveGame(void) {
         mapSaveDataBytes = 2;
     } else if (getCurrentMap() == &shopIslandMap) {
         mapSaveDataBytes = 3;
+    } else if (getCurrentMap() == &shopMap) {
+        mapSaveDataBytes = 4;
+    } else if (getCurrentMap() == &bathroomMap) {
+        mapSaveDataBytes = 5;
     } else {
         mapSaveDataBytes = 0; // Default to startMap if unknown
     }
@@ -106,6 +110,12 @@ void loadGame(void) {
             break;
         case 3:
             setCurrentMap(&shopIslandMap);
+            break;
+        case 4:
+            setCurrentMap(&shopMap);
+            break;
+        case 5:
+            setCurrentMap(&bathroomMap);
             break;
     }
     printf("Loaded\n");

@@ -6,6 +6,7 @@
 #include "pico/stdlib.h"
 #include "global.h"
 #include "fishing.h"
+#include "game_state.h"
 #include <stdio.h>
 
 joypad_state_t joypad_state;
@@ -77,7 +78,9 @@ void handleInput(hagl_backend_t *display) {
     }
 
     if (joypad_state.pressed & JOYPAD_X) { // I
-        game_state = GAME_STATE_MENU;
+        if (currentMap != &sprigRoom) {
+            game_state = GAME_STATE_MENU;
+        }
     }
     if (joypad_state.pressed & JOYPAD_Y) { // J
         printf("Money: %d\n", money);
