@@ -116,6 +116,14 @@ bool isWaterTile(hagl_bitmap_t *tile) {
             tile == &waterA2);
 }
 
+bool isCollisionTile(hagl_bitmap_t *tile) {
+    return (tile == &water || 
+            tile == &waterA1 || 
+            tile == &waterA2 ||
+            tile == &woodWall ||
+            tile == &blackTile);
+}
+
 bool canMoveTo(float newX, float newY) {
     struct map *currentMap = getCurrentMap();
     
@@ -128,6 +136,12 @@ bool canMoveTo(float newX, float newY) {
     int tileY1 = (int)(newY / TILE_SIZE);
     int tileX2 = (int)((newX + PLAYER_WIDTH - 1) / TILE_SIZE);
     int tileY2 = (int)((newY + PLAYER_HEIGHT - 1) / TILE_SIZE);
+
+    if (currentMap == &shopMap) { // If player is in shop manually add walls
+        if (tileX1 <= -1 || tileY1 < -1 || tileX2 >= 10 || tileY2 >= 8) {
+            return false;
+        }
+    }
     
     // Allow 1 tile off the edge of screen for map transitions
     if (tileX1 < -1 || tileY1 < -1 || tileX2 > 10 || tileY2 > 8) {
@@ -142,7 +156,7 @@ bool canMoveTo(float newX, float newY) {
     for (int y = tileY1; y <= tileY2; y++) {
         for (int x = tileX1; x <= tileX2; x++) {
             hagl_bitmap_t *tile = currentMap->tiles[y][x];
-            if (isWaterTile(tile)) {
+            if (isCollisionTile(tile)) {
                 return false;
             }
         }

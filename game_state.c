@@ -16,7 +16,7 @@ int catchSpeedIncrease;
 int weightIncrease;
 int rarityIncrease;
 
-static struct map (*currentMap) = &startMap;
+struct map (*currentMap) = &startMap;
 
 // Fish data implementation
 const fish_data_t fish_data[FISH_COUNT] = {

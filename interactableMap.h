@@ -28,18 +28,24 @@ extern struct interactableObject* startObjects[];
 extern struct interactableObject* centralMapObjects[];
 extern struct interactableObject* dockMapObjects[];
 extern struct interactableObject* shopIslandMapObjects[];
+extern struct interactableObject* shopMapObjects[];
+extern struct interactableObject* bathroomMapObjects[];
 extern struct interactableObject* sprigRoomObjects[];
 
 extern const int numstartObjects;
 extern const int numCentralMapObjects;
 extern const int numDockMapObjects;
 extern const int numShopIslandMapObjects;
+extern const int numShopMapObjects;
+extern const int numBathroomMapObjects;
 extern const int sprigRoomNumObjects;
 
 extern struct map startMap;
 extern struct map centralMap;
 extern struct map dockMap;
 extern struct map shopIslandMap;
+extern struct map shopMap;
+extern struct map bathroomMap;
 extern struct map sprigRoom;
 
 #endif // INTERACTABLE_MAP_H

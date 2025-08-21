@@ -32,6 +32,106 @@ struct interactableObject sign3 = {
     }
 };
 
+struct interactableObject sign4 = {
+    .x = 120,
+    .y = 60,
+    .sprite = &sign,
+    .numMessages = 1,
+    .messages = {
+        L"Interact with the shop (L) to enter",
+    }
+};
+
+struct interactableObject sign5 = {
+    .x = 128,
+    .y = 60,
+    .sprite = &sign,
+    .numMessages = 1,
+    .messages = {
+        L"Interact with the rug (L) to leave",
+    }
+};
+
+struct interactableObject shopBuilding = {
+    .x = 64,
+    .y = 0,
+    .sprite = &shop,
+    .numMessages = 1,
+    .messages = {
+        L"[1]",
+    }
+};
+
+struct interactableObject frame1 = {
+    .x = 42,
+    .y = 0,
+    .sprite = &fishFrame,
+    .numMessages = 1,
+    .messages = {
+        L"[11]",
+    }
+};
+
+struct interactableObject frame2 = {
+    .x = 74,
+    .y = 0,
+    .sprite = &fishFrame,
+    .numMessages = 1,
+    .messages = {
+        L"[12]",
+    }
+};
+
+struct interactableObject frame3 = {
+    .x = 106,
+    .y = 0,
+    .sprite = &fishFrame,
+    .numMessages = 1,
+    .messages = {
+        L"[13]",
+    }
+};
+
+struct interactableObject pcObj = {
+    .x = 143,
+    .y = 0,
+    .sprite = &pc,
+    .numMessages = 1,
+    .messages = {
+        L"[14]",
+    }
+};
+
+struct interactableObject rugObj = {
+    .x = 28,
+    .y = 110,
+    .sprite = &rug,
+    .numMessages = 1,
+    .messages = {
+        L"[2]",
+    }
+};
+
+struct interactableObject shopCounterObj = {
+    .x = 128,
+    .y = 48,
+    .sprite = &shopCounter,
+    .numMessages = 1,
+    .messages = {
+        L"[15]",
+    }
+};
+
+struct interactableObject fishTankObj = {
+    .x = 0,
+    .y = 67,
+    .sprite = &fishtank,
+    .numMessages = 1,
+    .messages = {
+        L"[16]",
+    }
+};
+
 struct interactableObject sprigObj = {
     .x = 54,
     .y = 19,
@@ -56,6 +156,8 @@ struct interactableObject* centralMapObjects[] = {
 const int numCentralMapObjects = sizeof(centralMapObjects) / sizeof(centralMapObjects[0]);
 
 struct interactableObject* shopIslandMapObjects[] = {
+    &shopBuilding,
+    &sign5
 };
 
 const int numShopIslandMapObjects = sizeof(shopIslandMapObjects) / sizeof(shopIslandMapObjects[0]);
@@ -64,6 +166,24 @@ struct interactableObject* dockMapObjects[] = {
 };
 
 const int numDockMapObjects = sizeof(dockMapObjects) / sizeof(dockMapObjects[0]);
+
+struct interactableObject* shopMapObjects[] = {
+    &sign4,
+    &frame1,
+    &frame2,
+    &frame3,
+    &pcObj,
+    &rugObj,
+    &shopCounterObj,
+    &fishTankObj
+};
+
+const int numShopMapObjects = sizeof(shopMapObjects) / sizeof(shopMapObjects[0]);
+
+struct interactableObject* bathroomMapObjects[] = {
+};
+
+const int numBathroomMapObjects = sizeof(bathroomMapObjects) / sizeof(bathroomMapObjects[0]);
 
 struct interactableObject* sprigRoomObjects[] = {
     &sprigObj,
@@ -124,7 +244,7 @@ struct map shopIslandMap = {
     .numObjects = numShopIslandMapObjects,
     .leftMap = &centralMap,
     .rightMap = NULL,
-    .upMap = NULL,
+    .upMap = &shopMap,
     .downMap = NULL,
 };
 
@@ -147,6 +267,44 @@ struct map dockMap = {
     .downMap = &centralMap,
 };
 
+struct map shopMap = {
+    .tiles = {
+        {&woodWall, &woodTile, &woodWall, &woodWall, &woodWall, &woodWall, &woodWall, &woodWall, &woodWall, &woodWall},
+        {&woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile},
+        {&woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile},
+        {&woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile},
+        {&woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile},
+        {&woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile},
+        {&woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile},
+        {&woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile}
+    },
+    .objects = shopMapObjects,
+    .numObjects = numShopMapObjects,
+    .leftMap = NULL,
+    .rightMap = NULL,
+    .upMap = &bathroomMap,
+    .downMap = NULL,
+};
+
+struct map bathroomMap = {
+    .tiles = {
+        {&blackTile, &blackTile, &blackTile, &blackTile, &greyTile, &greyTile, &blackTile, &blackTile, &blackTile, &blackTile},
+        {&blackTile, &blackTile, &blackTile, &blackTile, &greyTile, &greyTile, &blackTile, &blackTile, &blackTile, &blackTile},
+        {&blackTile, &blackTile, &blackTile, &blackTile, &greyTile, &greyTile, &blackTile, &blackTile, &blackTile, &blackTile},
+        {&blackTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &blackTile, &blackTile},
+        {&blackTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &woodTile, &blackTile, &blackTile},
+        {&blackTile, &woodTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile},
+        {&blackTile, &woodTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile},
+        {&blackTile, &woodTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile}
+    },
+    .objects = bathroomMapObjects,
+    .numObjects = numBathroomMapObjects,
+    .leftMap = NULL,
+    .rightMap = NULL,
+    .upMap = &sprigRoom,
+    .downMap = &shopMap,
+};
+
 struct map sprigRoom = {
     .tiles = {
         {&blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile, &blackTile},
@@ -160,4 +318,5 @@ struct map sprigRoom = {
     },
     .objects = sprigRoomObjects,
     .numObjects = sprigRoomNumObjects,
+    .downMap = &bathroomMap,
 };

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "pico/stdlib.h"
 #include "global.h"
+#include "game_state.h"
 
 wchar_t textLine1[26] = L"";
 wchar_t textLine2[26] = L"";
@@ -21,6 +22,18 @@ static const uint64_t DOOR_OPENING_DURATION_US = 5000000; // 5 seconds in micros
 // Execute special functions based on number codes
 void executeFunction(int functionCode) {
     switch (functionCode) {
+        case 1: // Enter shop
+            currentMap = currentMap->upMap;
+            player.x = 39;
+            player.y = 100; 
+            game_state = GAME_STATE_NORMAL;
+            break;
+        case 2: // Exit shop
+            currentMap = &shopIslandMap;
+            player.x = 104;
+            player.y = 43;
+            game_state = GAME_STATE_NORMAL;
+            break;
         default:
             // Unknown function code, do nothing
             break;
