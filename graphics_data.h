@@ -5,6 +5,7 @@
 #include <hagl.h>
 
 // External declarations for all sprites
+extern hagl_bitmap_t alert;
 extern hagl_bitmap_t blackTile;
 extern hagl_bitmap_t dockL;
 extern hagl_bitmap_t dockR;

@@ -116,6 +116,15 @@ void render(hagl_backend_t *display) {
             }
             player.steps = 0;
             break;
+        case GAME_STATE_FISHING:
+            if (fish_hooked) {
+                if (player.y < 9) {
+                    renderSprite(display, player.x, player.y + 20, &alert);
+                } else {
+                    renderSprite(display, player.x, player.y - 16, &alert);
+                }
+            }
+            break;
     }
     
     hagl_flush(display);
