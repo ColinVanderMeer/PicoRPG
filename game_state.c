@@ -4,6 +4,18 @@
 #include "global.h"
 
 
+int money;
+
+int fishMaxWeight[FISH_COUNT];
+int fishTimesCaught[FISH_COUNT];
+int allFishTimesCaught;
+
+int fishDisplayFish[3];
+
+int catchSpeedIncrease;
+int weightIncrease;
+int rarityIncrease;
+
 static struct map (*currentMap) = &startMap;
 
 // Fish data implementation

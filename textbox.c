@@ -21,29 +21,6 @@ static const uint64_t DOOR_OPENING_DURATION_US = 5000000; // 5 seconds in micros
 // Execute special functions based on number codes
 void executeFunction(int functionCode) {
     switch (functionCode) {
-        case 0:
-            wcscpy(player.inventory[player.inventory_count].name, L"Carrot");
-            player.inventory_count++;
-            break;
-        case 1:
-            wcscpy(player.inventory[player.inventory_count].name, L"Wheat");
-            player.inventory_count++;
-            break;
-        case 2:
-            wcscpy(player.inventory[player.inventory_count].name, L"Rock");
-            player.inventory_count++;
-            break;
-        case 3:
-            if (player.inventory_count == 3) {
-                // Start the door opening sequence
-                wcscpy(textLine1, L"The door opens...");
-                doorOpeningActive = true;
-                doorOpeningStartTime = time_us_64();
-            } else {
-                // Textbox says "look for the 3 magical items"
-                wcscpy(textLine1, L"Look for the 3 magical items!");
-            }
-            break;
         default:
             // Unknown function code, do nothing
             break;

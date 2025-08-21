@@ -64,6 +64,14 @@ void catchFish(void) {
     wchar_t message[100];
     swprintf(message, sizeof(message), L"You caught a %s weighing %.2f kg! It sold for $%d", fish_info.name, weight, price);
 
+    money += price;
+    fishTimesCaught[fish_caught]++;
+    allFishTimesCaught++;
+
+    if (fishMaxWeight[fish_caught] < weight) {
+        fishMaxWeight[fish_caught] = weight;
+    }
+
     game_state = GAME_STATE_TEXTBOX;
     globalCaughtFish = fish_caught;
     parseMessage(message);

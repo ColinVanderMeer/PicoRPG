@@ -4,13 +4,20 @@
 #define FLASH_TARGET_OFFSET (2044 * 1024)
 
 #include "player.h"
+#include "global.h"
 
 // Simple save data structure containing only essential player data
 struct player_save_data {
     float x, y;
     int direction;
-    struct item inventory[3];
-    int inventory_count; // Number of items in inventory
+    int fishMaxWeight[FISH_COUNT];
+    int money;
+    int fishTimesCaught[FISH_COUNT];
+    int allFishTimesCaught;
+    int fishDisplayFish[3];
+    int catchSpeedIncrease;
+    int weightIncrease;
+    int rarityIncrease;
 };
 
 void saveGame(void);

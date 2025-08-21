@@ -80,7 +80,7 @@ void handleInput(hagl_backend_t *display) {
         game_state = GAME_STATE_MENU;
     }
     if (joypad_state.pressed & JOYPAD_Y) { // J
-
+        printf("Money: %d\n", money);
     }
     if (joypad_state.pressed & JOYPAD_B) { // K
         game_state = GAME_STATE_NORMAL;

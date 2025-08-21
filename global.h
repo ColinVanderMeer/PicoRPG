@@ -41,4 +41,17 @@ extern const fish_data_t fish_data[FISH_COUNT];
 
 extern fish_list globalCaughtFish;
 
+extern int money;
+
+extern int fishMaxWeight[FISH_COUNT];
+extern int fishTimesCaught[FISH_COUNT];
+extern int allFishTimesCaught;
+
+extern int fishDisplayFish[3];
+
+extern int catchSpeedIncrease;
+extern int weightIncrease;
+extern int rarityIncrease;
+
+
 #endif // _CORE_H

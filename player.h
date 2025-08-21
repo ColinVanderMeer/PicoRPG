@@ -27,8 +27,6 @@ struct player {
     int animation_timer;
     int is_walking;
     struct animation_config animations[NUM_DIRECTIONS];
-    struct item inventory[3]; // Example inventory, can be expanded
-    int inventory_count; // Number of items in inventory
 };
 
 extern struct player player;

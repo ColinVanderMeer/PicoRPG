@@ -5,6 +5,7 @@
 #include "hardware/flash.h"
 #include "hardware/sync.h"
 #include "pico/stdlib.h"
+#include "global.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -17,11 +18,17 @@ void saveGame(void) {
         .x = player.x,
         .y = player.y,
         .direction = player.direction,
-        .inventory[0] = player.inventory[0],
-        .inventory[1] = player.inventory[1],
-        .inventory[2] = player.inventory[2],
-        .inventory_count = player.inventory_count
+        .money = money,
+        .allFishTimesCaught = allFishTimesCaught,
+        .catchSpeedIncrease = catchSpeedIncrease,
+        .weightIncrease = weightIncrease,
+        .rarityIncrease = rarityIncrease
     };
+    
+    // Copy array data using memcpy
+    memcpy(playerSave.fishMaxWeight, fishMaxWeight, sizeof(fishMaxWeight));
+    memcpy(playerSave.fishTimesCaught, fishTimesCaught, sizeof(fishTimesCaught));
+    memcpy(playerSave.fishDisplayFish, fishDisplayFish, sizeof(fishDisplayFish));
     
     uint8_t mapSaveDataBytes;
     if (getCurrentMap() == &startMap) {
@@ -70,11 +77,15 @@ void loadGame(void) {
     player.x = playerSave.x;
     player.y = playerSave.y;
     player.direction = playerSave.direction;
-    player.inventory_count = playerSave.inventory_count;
-    for (int i = 0; i < player.inventory_count; i++) {
-        wcscpy(player.inventory[i].name, playerSave.inventory[i].name);
-    }
-    
+    memcpy(fishMaxWeight, playerSave.fishMaxWeight, sizeof(playerSave.fishMaxWeight));
+    money = playerSave.money;
+    memcpy(fishTimesCaught, playerSave.fishTimesCaught, sizeof(playerSave.fishTimesCaught));
+    allFishTimesCaught = playerSave.allFishTimesCaught;
+    memcpy(fishDisplayFish, playerSave.fishDisplayFish, sizeof(playerSave.fishDisplayFish));
+    catchSpeedIncrease = playerSave.catchSpeedIncrease;
+    weightIncrease = playerSave.weightIncrease;
+    rarityIncrease = playerSave.rarityIncrease;
+
     // Reset animation state (don't save/load animation state)
     player.animation_timer = 0;
     player.is_walking = 0;
