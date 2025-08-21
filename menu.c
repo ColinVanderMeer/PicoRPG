@@ -67,6 +67,7 @@ void menu(hagl_backend_t *display) {
             }
         }
         if (!gpio_get(14)) {
+            game_state = GAME_STATE_NORMAL;
             return;
         }
     }

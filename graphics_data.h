@@ -40,6 +40,7 @@ extern hagl_bitmap_t grassWaterT;
 extern hagl_bitmap_t grassWaterTL;
 extern hagl_bitmap_t grassWaterTR;
 extern hagl_bitmap_t greyTile;
+extern hagl_bitmap_t leave;
 extern hagl_bitmap_t pc;
 extern hagl_bitmap_t playerIdleA1;
 extern hagl_bitmap_t playerIdleA2;

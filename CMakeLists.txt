@@ -62,6 +62,7 @@ add_executable(PicoGame
     fonts.c
     audio.c
     fishing.c
+    pcInterface.c
 )
 
 # Make sure graphics_data.c is generated before building PicoGame

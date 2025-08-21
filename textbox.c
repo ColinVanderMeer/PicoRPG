@@ -46,6 +46,9 @@ void executeFunction(int functionCode) {
         case 13:
             fishDisplay(2);
             break;
+        case 14:
+            game_state = GAME_STATE_PC;
+            break;
         default:
             // Unknown function code, do nothing
             break;
@@ -62,7 +65,7 @@ void fishDisplay(int frameNum) {
     printf("Line1");
     swprintf(textLine2, 26, L"Times Caught: %d", fishTimesCaught[globalCaughtFish]);
     printf("Line2");
-    swprintf(textLine3, 26, L"Max Weight: %.2fkg", fishMaxWeight[globalCaughtFish]);
+    swprintf(textLine3, 26, L"Max Weight: %.2f kg", fishMaxWeight[globalCaughtFish]);
     printf("Line3");
 }
 

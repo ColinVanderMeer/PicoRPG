@@ -30,7 +30,7 @@ const fish_data_t fish_data[FISH_COUNT] = {
         .name = "Cod",
         .weight = {0.5f, 3.0f},
         .texture = &fish_cod,
-        .description = "A cold-water fish that thrives in deep seas and northern waters\nCod is prized for its mild flavor and is a key species in many global fisheries"
+        .description = "A cold-water fish that thrives in deep seas and northern waters Cod is prized for its mild flavor and is a key species in many global fisheries"
     },
     [FISH_SALMON] = {
         .name = "Salmon",
@@ -42,7 +42,7 @@ const fish_data_t fish_data[FISH_COUNT] = {
         .name = "Pufferfish",
         .weight = {0.3f, 1.5f},
         .texture = &fish_pufferfish,
-        .description = "This fish inflates to defend itself, surprising predators\nHandle with care"
+        .description = "This fish inflates to defend itself, surprising predators Handle with care"
     },
     [FISH_TUNA] = {
         .name = "Tuna",
@@ -84,13 +84,13 @@ const fish_data_t fish_data[FISH_COUNT] = {
         .name = "Drimp",
         .weight = {0.5f, 2.5f},
         .texture = &fish_drimp,
-        .description = "Drimp has been stated to be quite cruel to other fish in it's area, but is sought after for it's decorative properties.\n\"Wow, Drimp is doing very good this week\" - Stock Analysts"
+        .description = "Drimp has been stated to be quite cruel to other fish in it's area, but is sought after for it's decorative properties. \"Wow, Drimp is doing very good this week\" - Stock Analysts"
     },
     [FISH_SHARK] = {
         .name = "Shark",
         .weight = {10.0f, 50.0f},
         .texture = &fish_shark,
-        .description = "The apex predator of the sea\nBut this one kinda looks cute and cuddly"
+        .description = "The apex predator of the sea But this one kinda looks cute and cuddly"
     },
     [FISH_ORPHEUS] = {
         .name = "Orpheus",

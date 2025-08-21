@@ -24,6 +24,7 @@
 #include "audio.h"
 #include "global.h"
 #include "fishing.h"
+#include "pcInterface.h"
 
 static const uint64_t US_PER_FRAME_60_FPS = 1000000 / 60;
 GameState game_state = GAME_STATE_TITLE;
@@ -107,11 +108,11 @@ void render(hagl_backend_t *display) {
     renderMap(display);
     renderInteractableObjects(display);
     renderPlayer(display);
-    
+
     if (currentMap == &shopMap) {
         renderSprite(display, 46, 4, fish_data[fishDisplayFish[0]].texture);
-        renderSprite(display, 78, 4, fish_data[fishDisplayFish[0]].texture);
-        renderSprite(display, 110, 4, fish_data[fishDisplayFish[0]].texture);
+        renderSprite(display, 78, 4, fish_data[fishDisplayFish[1]].texture);
+        renderSprite(display, 110, 4, fish_data[fishDisplayFish[2]].texture);
     }
 
     switch (game_state) {
@@ -130,6 +131,9 @@ void render(hagl_backend_t *display) {
                     renderSprite(display, player.x, player.y - 16, &alert);
                 }
             }
+            break;
+        case GAME_STATE_PC:
+            pcInterface(display);
             break;
     }
     
