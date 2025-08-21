@@ -22,10 +22,10 @@ fish_list selectFish(void) {
 
     int roll = rand() % 100;
 
-    if (roll >= 95) { // 5% Hack Rare
+    if (roll >= (95 - rarityIncrease*2)) { // 5% Hack Rare
         int random_index = rand() % (sizeof(hack_rare) / sizeof(hack_rare[0]));
         return hack_rare[random_index];
-    } else if (roll >= 75) { // 20% Rare
+    } else if (roll >= (75 - rarityIncrease*5)) { // 20% Rare
         int random_index = rand() % (sizeof(rare_fish) / sizeof(rare_fish[0]));
         return rare_fish[random_index];
     } else { // 75% Common
@@ -58,6 +58,7 @@ void catchFish(void) {
     fish_data_t fish_info = fish_data[fish_caught];
 
     int roll = rand() % 100;
+    roll += weightIncrease * 10;
 
     float weight = generateFishWeight(fish_info.weight, roll);
     int price = generateFishPrice(fish_caught, roll);
@@ -78,10 +79,9 @@ void catchFish(void) {
 }
 
 void fishingProcess(void) {
-    if (rand() % 120 == 0) {
+    if (rand() % (120 - catchSpeedIncrease*5) == 0) {
         fish_hooked = true;
         printf("FISH TIME IDIOT");
-        // Make fish alert appear
         // make timer happen
     }
 
