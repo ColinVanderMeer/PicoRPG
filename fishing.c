@@ -83,7 +83,6 @@ void catchFish(void) {
 void fishingProcess(void) {
     if (rand() % (120 - catchSpeedIncrease*5) == 0) {
         fish_hooked = true;
-        printf("FISH TIME IDIOT");
         // make timer happen
     }
 

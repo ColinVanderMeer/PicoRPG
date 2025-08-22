@@ -6,29 +6,7 @@ struct interactableObject sign1 = {
     .sprite = &sign,
     .numMessages = 1,
     .messages = {
-        L"Welcome to PicoRPG! Use L to interact with objects, K to close text boxes,   and I to open the menu.",
-    }
-};
-
-struct interactableObject sign2 = {
-    .x = 110,
-    .y = 32,
-    .sprite = &sign,
-    .numMessages = 1,
-    .messages = {
-        L"Your goal is to find the 3 magical items to open  the cabin. Good luck!",
-    }
-};
-
-struct interactableObject sign3 = {
-    .x = 107,
-    .y = 56,
-    .sprite = &sign,
-    .numMessages = 3,
-    .messages = {
-        L"Some NPC's have multiple lines of text. Press L   again to see more.",
-        L"See I have so much more  to say than the 100 characters in the text box!",
-        L"Uh... actually I've run  out of things to say now.",
+        L"Welcome to Fishing! Use L to interact and start fishing K to close text boxes and I to open the menu",
     }
 };
 
@@ -38,7 +16,7 @@ struct interactableObject sign4 = {
     .sprite = &sign,
     .numMessages = 1,
     .messages = {
-        L"Interact with the shop (L) to enter",
+        L"Interact with the rug (L) to leave",
     }
 };
 
@@ -48,7 +26,7 @@ struct interactableObject sign5 = {
     .sprite = &sign,
     .numMessages = 1,
     .messages = {
-        L"Interact with the rug (L) to leave",
+        L"Interact with the shop (L) to enter",
     }
 };
 
@@ -153,14 +131,12 @@ struct interactableObject sprigObj = {
 };
 
 struct interactableObject* startObjects[] = {
-    // &sign1,
-    // &sign2,
+    &sign1
 };
 
 const int numstartObjects = sizeof(startObjects) / sizeof(startObjects[0]);
 
 struct interactableObject* centralMapObjects[] = {
-    // &sign3,
 };
 
 const int numCentralMapObjects = sizeof(centralMapObjects) / sizeof(centralMapObjects[0]);
