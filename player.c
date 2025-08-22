@@ -2,6 +2,7 @@
 #include "graphics_data.h"
 #include "rendering.h"
 #include "game_state.h"
+#include "global.h"
 
 struct player player;
 
@@ -93,6 +94,23 @@ void renderPlayer(hagl_backend_t *display) {
         
         // Advance animation timer slower for idle
         player.animation_timer++;
+    }
+
+    if (game_state == GAME_STATE_FISHING) {
+        switch (player.direction) {
+            case 0: // Up
+                current_sprite = &playerFishW;
+                break;
+            case 1: // Left
+                current_sprite = &playerFishA;
+                break;
+            case 2: // Down
+                current_sprite = &playerFishS;
+                break;
+            case 3: // Right
+                current_sprite = &playerFishD;
+                break;
+        }
     }
     
     renderSprite(display, (int)player.x, (int)player.y, current_sprite);
