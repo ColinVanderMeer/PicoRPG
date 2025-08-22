@@ -31,6 +31,7 @@ static const uint64_t US_PER_FRAME_60_FPS = 1000000 / 60;
 GameState game_state = GAME_STATE_TITLE;
 bool fish_hooked = false;
 fish_list globalCaughtFish = FISH_COUNT;
+int easterEgg = 0;
 
 static const struct sound_i2s_config sound_config = {
   .pin_scl         = 10,
@@ -113,10 +114,14 @@ void render(hagl_backend_t *display) {
     renderInteractableObjects(display);
     renderPlayer(display);
 
-    if (currentMap == &shopMap) {
+    if (currentMap == &shopMap) { // render fish for shop
         renderSprite(display, 46, 4, fish_data[fishDisplayFish[0]].texture);
         renderSprite(display, 78, 4, fish_data[fishDisplayFish[1]].texture);
         renderSprite(display, 110, 4, fish_data[fishDisplayFish[2]].texture);
+    }
+
+    if (easterEgg != 0 && currentMap == &bathroomMap) { // Hide Easter egg if 1-9
+        hagl_fill_rectangle_xyxy(display, 0, 0, 160, 48, 0x0000);
     }
 
     switch (game_state) {

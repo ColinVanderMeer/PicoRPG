@@ -54,5 +54,7 @@ extern int catchSpeedIncrease;
 extern int weightIncrease;
 extern int rarityIncrease;
 
+extern int easterEgg;
+
 
 #endif // _CORE_H

@@ -150,5 +150,8 @@ void handleMapTransitions(void) {
     else if (player.y < -PLAYER_HEIGHT && currentMap->upMap != NULL) {
         currentMap = currentMap->upMap;
         player.y = SCREEN_HEIGHT - PLAYER_HEIGHT; 
+        if (currentMap == &bathroomMap) {
+            easterEgg = rand() % 10;
+        }
     }
 }
