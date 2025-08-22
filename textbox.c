@@ -40,7 +40,6 @@ void executeFunction(int functionCode) {
             game_state = GAME_STATE_FISHING;
             break;
         case 11:
-            printf("Displaying fish 1\n");
             fishDisplay(0);
             break;
         case 12:
@@ -67,17 +66,11 @@ void executeFunction(int functionCode) {
 }
 
 void fishDisplay(int frameNum) {
-    printf("We enter the function");
-    
     globalCaughtFish = fishDisplayFish[frameNum];
-    printf("Globalfish: %d\n", globalCaughtFish);
     
     swprintf(textLine1, 26, L"%hs", fish_data[globalCaughtFish].name);
-    printf("Line1");
     swprintf(textLine2, 26, L"Times Caught: %d", fishTimesCaught[globalCaughtFish]);
-    printf("Line2");
     swprintf(textLine3, 26, L"Max Weight: %.2f kg", fishMaxWeight[globalCaughtFish]);
-    printf("Line3");
 }
 
 // Parse message and handle special functions while formatting text
