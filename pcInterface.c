@@ -10,7 +10,6 @@
 #include <stdio.h>
 
 void infoScreen(hagl_backend_t *display, int fishIndex) {
-    printf("Beginning of function\n");
     int butPressed = 1;
 
     wchar_t weightLine[10] = L"";
@@ -27,20 +26,16 @@ void infoScreen(hagl_backend_t *display, int fishIndex) {
     wchar_t infoLine10[16] = L"";
     wchar_t infoLine11[16] = L"";
     wchar_t infoLine12[16] = L"";
-    printf("Variable Init\n");
     
     
     hagl_fill_rounded_rectangle_xyxy(display, 0, 0, 159, 127, 5, 0x0000); // Go back to black because apparently hagl can only render text with a black background
     hagl_draw_rounded_rectangle_xyxy(display, 0, 0, 159, 127, 5, 0xe0da);
-    printf("Fish Index: %d\n", fishIndex);
     
     renderScaledSprite(display, 15, 10, fish_data[fishIndex].texture, 4);
 
     hagl_put_text(display, L"Weight:", 5, 49, 0xffff, font6x9);
-    printf("Here?\n");
     swprintf(weightLine, 10, L"%.2f Kg", fishMaxWeight[fishIndex]);
     hagl_put_text(display, weightLine, 5, 59, 0xffff, font6x9);
-    printf("Put text\n");
     wchar_t message[200];
     swprintf(message, 200, L"%hs", fish_data[fishIndex].description);
 
@@ -48,7 +43,6 @@ void infoScreen(hagl_backend_t *display, int fishIndex) {
     int currentLine = 0;
     int currentPos = 0;
     const int maxLineLength = 15;
-    printf("Make lines\n");
     for (int i = 0; message[i] != L'\0' && currentLine < 12; i++) {
         if (currentPos < maxLineLength) {
             // Skip leading spaces on any line
@@ -73,7 +67,6 @@ void infoScreen(hagl_backend_t *display, int fishIndex) {
             }
         }
     }
-    printf("Parse\n");
     hagl_put_text(display, infoLine1, 62, 3, 0xffff, font6x9);
     hagl_put_text(display, infoLine2, 62, 13, 0xffff, font6x9);
     hagl_put_text(display, infoLine3, 62, 23, 0xffff, font6x9);
@@ -86,7 +79,6 @@ void infoScreen(hagl_backend_t *display, int fishIndex) {
     hagl_put_text(display, infoLine10, 62, 93, 0xffff, font6x9);
     hagl_put_text(display, infoLine11, 62, 103, 0xffff, font6x9);
     hagl_put_text(display, infoLine12, 62, 113, 0xffff, font6x9);
-    printf("Put final\n");
 
     hagl_put_text(display, L"Display:", 5, 76, 0xffff, font6x9);
     hagl_put_text(display, L"Frame 1", 15, 86, 0xffff, font6x9);
@@ -131,7 +123,6 @@ void infoScreen(hagl_backend_t *display, int fishIndex) {
         }
 
         update_mod_player();
-        printf("I shouldn't see this\n");
         hagl_flush(display);
     }
 }
@@ -197,7 +188,6 @@ void pcInterface(hagl_backend_t *display) {
             }
 
             if (fishTimesCaught[selection]) {
-                printf("Unlocked");
                 infoScreen(display, selection);
                 butPressed = 1;
             }
