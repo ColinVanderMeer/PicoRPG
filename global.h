@@ -12,6 +12,7 @@ typedef enum GameState {
   GAME_STATE_TEXTBOX,
   GAME_STATE_FISHING,
   GAME_STATE_PC,
+  GAME_STATE_SHOP
 } GameState;
 
 extern GameState game_state;

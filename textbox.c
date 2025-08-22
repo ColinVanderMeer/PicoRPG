@@ -49,8 +49,8 @@ void executeFunction(int functionCode) {
         case 14:
             game_state = GAME_STATE_PC;
             break;
-
         case 15:
+            game_state = GAME_STATE_SHOP;
             break;
         case 16:
             wcscpy(textLine1, L"Look at all those fishies");

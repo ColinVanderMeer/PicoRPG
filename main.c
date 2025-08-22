@@ -25,6 +25,7 @@
 #include "global.h"
 #include "fishing.h"
 #include "pcInterface.h"
+#include "shopMenu.h"
 
 static const uint64_t US_PER_FRAME_60_FPS = 1000000 / 60;
 GameState game_state = GAME_STATE_TITLE;
@@ -87,6 +88,12 @@ void gameLoop(hagl_backend_t *display) {
         case GAME_STATE_MENU:
             menu(display);
             break;
+        case GAME_STATE_PC:
+            pcInterface(display);
+            break;
+        case GAME_STATE_SHOP:
+            shopMenu(display);
+            break;
         case GAME_STATE_TEXTBOX:
             handleInput(display);
             updateTextBoxTimer();
@@ -94,9 +101,6 @@ void gameLoop(hagl_backend_t *display) {
         case GAME_STATE_FISHING:
             handleInput(display);
             fishingProcess();
-            // Unimplemented
-            break;
-        case GAME_STATE_PC:
             // Unimplemented
             break;
         default:
@@ -131,9 +135,6 @@ void render(hagl_backend_t *display) {
                     renderSprite(display, player.x, player.y - 16, &alert);
                 }
             }
-            break;
-        case GAME_STATE_PC:
-            pcInterface(display);
             break;
     }
     
