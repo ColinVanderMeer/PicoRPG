@@ -132,6 +132,16 @@ struct interactableObject fishTankObj = {
     }
 };
 
+struct interactableObject toiletObj = {
+    .x = 112,
+    .y = 55,
+    .sprite = &toilet,
+    .numMessages = 1,
+    .messages = {
+        L"[5]",
+    }
+};
+
 struct interactableObject sprigObj = {
     .x = 54,
     .y = 19,
@@ -181,6 +191,7 @@ struct interactableObject* shopMapObjects[] = {
 const int numShopMapObjects = sizeof(shopMapObjects) / sizeof(shopMapObjects[0]);
 
 struct interactableObject* bathroomMapObjects[] = {
+    &toiletObj
 };
 
 const int numBathroomMapObjects = sizeof(bathroomMapObjects) / sizeof(bathroomMapObjects[0]);

@@ -36,6 +36,9 @@ void executeFunction(int functionCode) {
             game_state = GAME_STATE_NORMAL;
             break;
 
+        case 5:
+            game_state = GAME_STATE_FISHING;
+            break;
         case 11:
             printf("Displaying fish 1\n");
             fishDisplay(0);
